@@ -23,7 +23,7 @@
         android:layout_height="48dp"
         android:layout_marginTop="12dp"
         android:background="@android:color/transparent"
-        android:contentDescription="@string/bottom_sheet_behavior"
+        android:contentDescription="@string/appbar_scrolling_view_behavior"
         android:minWidth="48dp"
         android:minHeight="48dp"
         app:backgroundTint="@android:color/transparent"
@@ -63,6 +63,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/download"
+            android:paddingHorizontal="23dp"
             android:fontFamily="monospace"
             android:backgroundTint="@color/black"
             android:textSize="20sp"/>
@@ -73,7 +74,8 @@
             android:layout_marginStart="12dp"
             app:icon="@drawable/checkbox_favourite"
             app:iconGravity="textStart"
-            app:iconPadding="2dp"/>
+            app:iconPadding="2dp"
+            android:contentDescription="@string/download"/>
     </LinearLayout>
 
 
