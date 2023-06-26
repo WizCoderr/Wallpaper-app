@@ -144,7 +144,7 @@
                     android:padding="8dp"
                     android:text="@string/how_to_set_live_wallpaper"
                     android:textSize="20sp"
-                    app:drawableStartCompat="@drawable/icon_feedback" />
+                    app:drawableStartCompat="@drawable/icon_settings" />
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
 
