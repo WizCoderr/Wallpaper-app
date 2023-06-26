@@ -1,5 +1,14 @@
 <resources>
     <string name="app_name">WallpaperApp</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="search">Search</string>
+    <string name="download">Download</string>
+    <string name="me">Me</string>
+    <string name="favorite_s">Favorite\'s</string>
+    <string name="saved">Saved</string>
+    <string name="DIY">DIY</string>
+    <string name="how_to_set_live_wallpaper">How to set Live Wallpaper</string>
+    <string name="tell_a_friend">Tell a Friend</string>
+    <string name="feedback">Feedback</string>
+    <string name="help_center">Help Center</string>
+    <string name="About_us">About Us</string>
 </resources>

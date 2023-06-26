@@ -38,17 +38,18 @@
                 android:background="@android:color/transparent"
                 android:insetLeft="0dp"
                 android:insetTop="0dp"
+                android:layout_marginEnd="8dp"
                 android:insetRight="0dp"
                 android:insetBottom="0dp"
-
-                app:iconTint="@color/black"
                 app:backgroundTint="@android:color/transparent"
                 app:icon="@drawable/icon_back"
                 app:iconGravity="textStart"
                 app:iconPadding="0dp"
+                app:iconTint="@color/black"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/searchEditText"/>
 
             <EditText
                 android:id="@+id/searchEditText"
@@ -57,7 +58,9 @@
                 android:layout_marginEnd="16dp"
                 android:background="@color/white"
                 android:ems="10"
-                android:hint="Search"
+                android:minWidth="48dp"
+                android:minHeight="48dp"
+                android:hint="@string/search"
                 android:inputType="text"
                 android:paddingTop="8dp"
                 android:paddingBottom="8dp"
@@ -66,12 +69,14 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.503"
                 app:layout_constraintStart_toEndOf="@+id/back_btn"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                android:importantForAutofill="no" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </com.google.android.material.appbar.AppBarLayout>
+
 
 
 
