@@ -1,0 +1,266 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".fragments.SubscriptionFragment">
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/back_btn"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:background="@android:color/transparent"
+        android:contentDescription="g"
+        android:minWidth="48dp"
+        android:minHeight="48dp"
+        app:backgroundTint="@android:color/transparent"
+        app:iconTint="@color/black"
+        app:iconGravity="textStart"
+        app:iconPadding="0dp"
+        app:icon="@drawable/arrow_back"
+        android:drawableTint="@color/primary_dark"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/iv_illustration"
+            android:layout_width="240dp"
+            android:layout_height="240dp"
+            android:src="@drawable/illustration_premium"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="20dp"
+            />
+
+    <TextView
+        android:id="@+id/tv_premium"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/iv_illustration"
+        android:text="@string/upgrade"
+        android:layout_marginTop="25dp"
+        android:textColor="@color/black"
+        android:textSize="@dimen/very_big_text"
+        android:textStyle="bold"/>
+
+
+
+        <LinearLayout
+            android:id="@+id/plan1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_premium"
+            app:layout_constraintEnd_toStartOf="@id/plan2"
+            android:layout_marginTop="40dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/text_bg"
+                android:textColor="@color/white"
+                android:paddingHorizontal="14dp"
+                android:paddingVertical="5dp"
+                android:textSize="@dimen/very_small_text"
+                android:text="@string/save60"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/very_big_text"
+                android:textStyle="bold"
+                android:textAlignment="center"
+                android:text="@string/month1"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAlignment="center"
+                android:textSize="@dimen/medium_text"
+                android:text="@string/months"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAlignment="center"
+                android:textSize="@dimen/medium_text"
+                android:textStyle="bold"
+                android:text="@string/price1"/>
+
+
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/plan2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toEndOf="@id/plan1"
+            app:layout_constraintTop_toTopOf="@id/plan1"
+            app:layout_constraintEnd_toStartOf="@id/plan3"
+            android:background="@drawable/planc_selector"
+            android:paddingHorizontal="20dp"
+            android:paddingBottom="8dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/text_bg"
+                android:textColor="@color/white"
+                android:paddingHorizontal="14dp"
+                android:paddingVertical="5dp"
+                android:textSize="@dimen/very_small_text"
+                android:text="@string/save60"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/very_big_text"
+                android:textStyle="bold"
+                android:textAlignment="center"
+                android:text="@string/month1"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAlignment="center"
+                android:textSize="@dimen/medium_text"
+                android:text="@string/months"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAlignment="center"
+                android:textSize="@dimen/medium_text"
+                android:textStyle="bold"
+                android:text="@string/price1"/>
+
+
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/plan3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toEndOf="@id/plan2"
+            app:layout_constraintTop_toTopOf="@id/plan2"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/text_bg"
+                android:textColor="@color/white"
+                android:paddingHorizontal="14dp"
+                android:paddingVertical="5dp"
+                android:textSize="@dimen/very_small_text"
+                android:text="@string/save60"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/very_big_text"
+                android:textStyle="bold"
+                android:textAlignment="center"
+                android:text="@string/month1"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAlignment="center"
+                android:textSize="@dimen/medium_text"
+                android:text="@string/months"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAlignment="center"
+                android:textSize="@dimen/medium_text"
+                android:textStyle="bold"
+                android:text="@string/price1"/>
+
+
+        </LinearLayout>
+
+
+
+    <Button
+        android:id="@+id/btn_purchase"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/get_subs"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/plan2"
+        android:layout_marginTop="30dp"
+        android:layout_marginHorizontal="35dp"
+        android:textSize="@dimen/medium_text"
+        android:backgroundTint="@color/primary_dark"
+        android:paddingVertical="15dp"/>
+
+
+
+<TextView
+    android:id="@+id/tv_subscribe"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:textSize="@dimen/medium_text"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintTop_toBottomOf="@id/btn_purchase"
+    android:text="@string/subscribe_text"
+    android:layout_marginTop="20dp"
+    android:textStyle="bold"/>
+
+    <TextView
+        android:id="@+id/tv_subscribe_desc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/subscribe_text_desc"
+        android:textSize="@dimen/medium_text"
+        android:textAlignment="center"
+        app:layout_constraintTop_toBottomOf="@id/tv_subscribe"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="15dp"/>
+
+    <TextView
+        android:id="@+id/tv_extra"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/medium_text"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_subscribe_desc"
+        android:text="@string/subscribe_text"
+        android:layout_marginTop="20dp"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:id="@+id/tv_extra_desc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/subscribe_text_desc"
+        android:textSize="@dimen/medium_text"
+        android:textAlignment="center"
+        app:layout_constraintTop_toBottomOf="@id/tv_extra"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="15dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/very_small_text"
+        app:layout_constraintTop_toBottomOf="@id/tv_extra_desc"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:text="@string/TC"
+        android:layout_marginBottom="20dp"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>

@@ -5,12 +5,18 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
+import com.flaxstudio.wallpaperapp.R
+import com.flaxstudio.wallpaperapp.adapters.HomePagerAdapter
 import com.flaxstudio.wallpaperapp.databinding.FragmentHomeBinding
+import com.google.android.material.tabs.TabLayoutMediator
 
 
 class HomeFragment : Fragment() {
 
     private lateinit var binding: FragmentHomeBinding
+
+    private val tabTitles = arrayListOf("Nature" , "Space" , "Buildings", "Animals")
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -18,7 +24,31 @@ class HomeFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         binding = FragmentHomeBinding.inflate(inflater ,container , false)
+
+        setupLayoutWithViewPager()
         return binding.root
+
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        binding.searchBtn.setOnClickListener{
+            findNavController().navigate(R.id.action_homeFragment_to_subscriptionFragment)
+        }
+        binding.menuBtn.setOnClickListener{
+            findNavController().navigate(R.id.action_homeFragment_to_downloadFragment)
+        }
+    }
+
+
+
+    private fun setupLayoutWithViewPager() {
+        binding.viewPager.adapter = HomePagerAdapter(this)
+
+        TabLayoutMediator(binding.tabBarLayout , binding.viewPager){ tab , position ->
+            tab.text = tabTitles[position]
+
+        }.attach()
     }
 
 

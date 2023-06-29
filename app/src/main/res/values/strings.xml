@@ -11,4 +11,25 @@
     <string name="feedback">Feedback</string>
     <string name="help_center">Help Center</string>
     <string name="About_us">About Us</string>
+    <string name="setWallpaper">Set As Wallpaper</string>
+
+
+    <!-- Text For Subscription Fragment -->
+
+    <string name="upgrade">Upgrade tp Premium</string>
+    <string name="save60"> SAVE 60%</string>
+    <string name="month1">12</string>
+    <string name="month">months</string>
+    <string name="price1">₹5.00/mt</string>
+    <string name="months">months</string>
+    <string name="get_subs">Get 3 Month in ₹ 39</string>
+    <string name="subscribe_text">Why You Should Purchase Premium ?</string>
+    <string name="subscribe_text_desc">Refresh your device appearance with a diverse range
+        of personalized wallpapers that add
+        a touch of style to your screen.</string>
+    <string name="TC">Terms and Condition Apply. Read More...</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+
 </resources>
