@@ -37,6 +37,7 @@ class HomeFragment : Fragment() {
         }
         binding.menuBtn.setOnClickListener{
             findNavController().navigate(R.id.action_homeFragment_to_downloadFragment)
+            //findNavController().navigate(R.id.action_homeFragment_to_collectionFragment)
         }
     }
 
