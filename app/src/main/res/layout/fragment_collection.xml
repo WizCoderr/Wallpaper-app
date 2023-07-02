@@ -47,9 +47,38 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
 
+            <TextView
+                android:id="@+id/tv_collectionName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Animals"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:textSize="@dimen/medium_text"
+                android:textStyle="bold"/>
+
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </com.google.android.material.appbar.AppBarLayout>
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_item"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="10dp"
+        app:layout_constraintTop_toBottomOf="@id/appBarLayout"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:listitem="@layout/collection_item"
+        tools:itemCount="10"
+        android:layout_marginHorizontal="5dp"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
