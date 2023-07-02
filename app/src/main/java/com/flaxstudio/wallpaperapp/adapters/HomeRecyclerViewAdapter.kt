@@ -33,7 +33,7 @@ class HomeRecyclerViewAdapter(private val context: Context) : RecyclerView.Adapt
         Glide.with(context).load(R.drawable.lovingone).into(holder.coverPhoto)
 
         holder.collectionName.text = "Animals"
-        holder.totalImages.text = "1250"
+        holder.totalImages.text = "1250 images"
 
 
     }

@@ -7,6 +7,7 @@
     tools:context=".fragments.DownloadFragment">
 
     <ImageView
+        android:id="@+id/wallpaper"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -35,33 +36,21 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/more_menu"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
+    <androidx.appcompat.widget.AppCompatImageButton
+        android:id="@+id/btn_download"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:layout_marginTop="12dp"
-        android:background="@android:color/transparent"
-        android:contentDescription="@string/bottom_sheet_behavior"
-        android:minWidth="48dp"
-        android:minHeight="48dp"
-        app:backgroundTint="@android:color/transparent"
-        app:icon="@drawable/icon_more"
-        app:iconGravity="textStart"
-        app:iconPadding="0dp"
-        app:iconTint="@color/primary_dark"
+        android:contentDescription="@string/download"
+        android:minWidth="50dp"
+        android:minHeight="50dp"
+        android:backgroundTint="@android:color/transparent"
+        app:background="@android:color/transparent"
+       android:src="@drawable/icon_download"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:gravity="center"
-        android:layout_margin="12dp">
-    </LinearLayout>
-        <com.google.android.material.button.MaterialButton
+    <com.google.android.material.button.MaterialButton
             android:id="@+id/setWallpaper"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -71,8 +60,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/btn_like"
-            android:layout_marginBottom="20dp"
-            />
+            android:layout_marginBottom="20dp"/>
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_like"
             android:layout_width="50dp"

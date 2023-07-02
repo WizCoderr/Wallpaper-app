@@ -30,6 +30,9 @@
     <string name="TC">Terms and Condition Apply. Read More...</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="both_screens">Set as Home and Lock Screen</string>
+    <string name="HomeScreen">Home Screen</string>
+    <string name="LockScreen">Lock Screen</string>
 
 
 </resources>
