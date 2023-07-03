@@ -29,3 +29,6 @@ class CollectionRecyclerViewAdapter(private val context : Context) : RecyclerVie
         Glide.with(context).load(R.drawable.lovingone4).into(holder.image)
     }
 }
+interface onClick {
+
+}

@@ -3,6 +3,21 @@
 
 
     <item android:id="@+id/home"
+        android:icon="@drawable/homeicon_filled"
+        android:iconTintMode="src_atop"
         android:title="Home"/>
+    <item android:id="@+id/collections"
+        android:icon="@drawable/outline_collections"
+        android:iconTintMode="src_atop"
+        android:title="Collection"/>
+    <item android:id="@+id/favourites"
+        android:icon="@drawable/star_outline"
+        android:iconTintMode="src_in"
+        android:title="Favourite"/>
+    <item android:id="@+id/profile"
+        android:icon="@drawable/user_outline"
+        android:iconTintMode="src_over"
+        android:title="Profile"/>
+
 
 </menu>

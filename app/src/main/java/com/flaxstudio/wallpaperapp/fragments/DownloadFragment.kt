@@ -12,6 +12,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
@@ -22,6 +23,7 @@ import com.flaxstudio.wallpaperapp.databinding.FragmentDownloadBinding
 class DownloadFragment : Fragment() {
     private lateinit var binding: FragmentDownloadBinding
     private lateinit var bitmap:Bitmap
+    private lateinit var thisContext : Context
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -30,14 +32,15 @@ class DownloadFragment : Fragment() {
         return binding.root
     }
 
-    @RequiresApi(Build.VERSION_CODES.M)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        thisContext = requireContext()
         bitmap = (binding.wallpaper.drawable as BitmapDrawable).bitmap
         binding.backBtn.setOnClickListener { findNavController().popBackStack() }
         binding.setWallpaper.setOnClickListener { setAsWallpaper(bitmap) }
         binding.btnDownload.setOnClickListener{
-            downloadImage(requireContext() , "https://images.unsplash.com/photo-1655705247374-02e5e9a2bbec")
+            Toast.makeText(thisContext , "Downloading..." , Toast.LENGTH_SHORT).show()
+            downloadImage(thisContext , "https://images.unsplash.com/photo-1655705247374-02e5e9a2bbec")
         }
 
     }
@@ -50,9 +53,9 @@ class DownloadFragment : Fragment() {
             wallpaperManager.setBitmap(bitmap)
     }
 
-    @RequiresApi(Build.VERSION_CODES.M)
-    fun downloadImage(context: Context, url: String): Long {
-        val downloadManager = context.getSystemService(DownloadManager::class.java)!!
+    private fun downloadImage(context: Context, url: String): Long {
+       // val downloadManager = context.getSystemService(DownloadManager::class.java)!!
+        val downloadManager = context.getSystemService(Context.DOWNLOAD_SERVICE) as DownloadManager
 
         val request = DownloadManager.Request(url.toUri())
             .setMimeType("image/jpg")
