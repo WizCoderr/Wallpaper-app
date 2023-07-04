@@ -5,19 +5,23 @@ import android.app.WallpaperManager
 import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.drawable.BitmapDrawable
-import android.os.Build
 import android.os.Bundle
 import android.os.Environment
 import android.util.Log
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.RadioGroup
 import android.widget.Toast
-import androidx.annotation.RequiresApi
+import androidx.appcompat.app.AlertDialog
 import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import com.flaxstudio.wallpaperapp.R
 import com.flaxstudio.wallpaperapp.databinding.FragmentDownloadBinding
+import com.flaxstudio.wallpaperapp.utils.setWallpaper
+import com.google.android.material.button.MaterialButton
 
 
 class DownloadFragment : Fragment() {
@@ -46,11 +50,21 @@ class DownloadFragment : Fragment() {
     }
 
     private fun setAsWallpaper(bitmap: Bitmap) {
-        val wallpaperManager = WallpaperManager.getInstance(requireContext())
-        if (Build.VERSION.SDK_INT>=Build.VERSION_CODES.N)
-            wallpaperManager.setBitmap(bitmap,null,true,WallpaperManager.FLAG_LOCK)
-        else
-            wallpaperManager.setBitmap(bitmap)
+        val dialogView = LayoutInflater.from(thisContext).inflate(R.layout.wallpaper_set_layout, null)
+        val builder = AlertDialog.Builder(thisContext)
+        builder.setView(dialogView)
+
+        val dialog = builder.create()
+        dialog.window?.setGravity(Gravity.BOTTOM)
+        dialog.show()
+        val radioButton = dialog.findViewById<RadioGroup>(R.id.group_btn)
+        dialog.findViewById<MaterialButton>(R.id.apply_btn)?.setOnClickListener {
+            when(radioButton?.checkedRadioButtonId){
+                R.id.both_wallpaper-> WallpaperManager.getInstance(thisContext).setBitmap(bitmap)
+                R.id.homeScreen-> WallpaperManager.getInstance(thisContext).setWallpaper(thisContext,bitmap,WallpaperManager.FLAG_SYSTEM)
+                R.id.lockScreen-> WallpaperManager.getInstance(thisContext).setWallpaper(thisContext,bitmap,WallpaperManager.FLAG_LOCK)
+            }
+        }
     }
 
     private fun downloadImage(context: Context, url: String): Long {

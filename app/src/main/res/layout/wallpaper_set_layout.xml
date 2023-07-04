@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.google.android.material.circularreveal.cardview.CircularRevealCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    app:cardElevation="5dp"
+    android:layout_gravity="bottom"
+    android:background="@android:color/transparent"
+    app:cardBackgroundColor="@color/primary_dark"
     app:cardCornerRadius="@dimen/rounded_high"
-    app:cardBackgroundColor="@color/primary_dark">
+    app:cardElevation="5dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -17,15 +19,15 @@
             android:id="@+id/text"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:textColor="@color/white"
-            android:text="@string/setAsWallpaper"
-            android:textSize="@dimen/medium_text"
             android:padding="@dimen/rounded_low"
+            android:text="@string/setAsWallpaper"
+            android:textColor="@color/white"
+            android:textSize="@dimen/medium_text"
 
-            app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toTopOf="@id/group_btn"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"/>
+            app:layout_constraintTop_toTopOf="parent" />
 
         <RadioGroup
             android:id="@+id/group_btn"
@@ -40,6 +42,7 @@
                 android:id="@+id/both_wallpaper"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:gravity="center"
                 android:text="@string/both_screens"
                 android:textColor="@color/white" />
 
@@ -47,6 +50,7 @@
                 android:id="@+id/homeScreen"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:gravity="center"
                 android:text="@string/HomeScreen"
                 android:textColor="@color/white" />
 
@@ -54,22 +58,24 @@
                 android:id="@+id/lockScreen"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:gravity="center"
                 android:text="@string/LockScreen"
                 android:textColor="@color/white" />
         </RadioGroup>
+
         <com.google.android.material.button.MaterialButton
             android:id="@+id/apply_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/apply"
-            android:textSize="@dimen/medium_text"
-            android:backgroundTint="@color/white"
-            android:textColor="@color/black"
             android:layout_marginTop="@dimen/rounded_low"
-            app:layout_constraintTop_toBottomOf="@id/group_btn"
-            app:layout_constraintStart_toStartOf="@id/group_btn"
+            android:backgroundTint="@color/white"
+            android:text="@string/apply"
+            android:textColor="@color/black"
+            android:textSize="@dimen/medium_text"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@id/group_btn"
-            app:layout_constraintBottom_toBottomOf="parent"/>
+            app:layout_constraintStart_toStartOf="@id/group_btn"
+            app:layout_constraintTop_toBottomOf="@id/group_btn" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </com.google.android.material.circularreveal.cardview.CircularRevealCardView>
