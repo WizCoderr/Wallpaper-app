@@ -8,7 +8,6 @@
     <string name="DIY">DIY</string>
     <string name="how_to_set_live_wallpaper">How to set Live Wallpaper</string>
     <string name="tell_a_friend">Tell a Friend</string>
-    <string name="feedback">Feedback</string>
     <string name="help_center">Help Center</string>
     <string name="About_us">About Us</string>
     <string name="setWallpaper">Set As Wallpaper</string>
@@ -34,6 +33,13 @@
     <string name="HomeScreen">Set as Home Screen</string>
     <string name="LockScreen">Set as Lock Screen</string>
     <string name="apply">Apply</string>
+
+
+    <string name="share">Share</string>
+    <string name="share_ui">Share</string>
+    <string name="rate_us">Rate Us</string>
+    <string name="feedback">Feedback</string>
+    <string name="privacy_policy">Privacy Policy</string>
 
 
 </resources>
