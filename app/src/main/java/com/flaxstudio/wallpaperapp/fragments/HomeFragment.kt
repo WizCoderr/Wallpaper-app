@@ -1,10 +1,10 @@
 package com.flaxstudio.wallpaperapp.fragments
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.flaxstudio.wallpaperapp.R
 import com.flaxstudio.wallpaperapp.adapters.HomePagerAdapter
@@ -21,7 +21,7 @@ class HomeFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         // Inflate the layout for this fragment
         binding = FragmentHomeBinding.inflate(inflater ,container , false)
 
@@ -37,7 +37,7 @@ class HomeFragment : Fragment() {
         }
         binding.menuBtn.setOnClickListener{
             findNavController().navigate(R.id.action_homeFragment_to_downloadFragment)
-            //findNavController().navigate(R.id.action_homeFragment_to_collectionFragment)
+//            findNavController().navigate(R.id.action_homeFragment_to_collectionFragment)
         }
     }
 

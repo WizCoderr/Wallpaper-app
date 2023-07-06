@@ -22,13 +22,13 @@ class CollectionRecyclerViewAdapter(private val context : Context) : RecyclerVie
     }
 
     override fun getItemCount(): Int {
-        return 18
+        return 30
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         Glide.with(context).load(R.drawable.lovingone4).into(holder.image)
     }
 }
-interface onClick {
+interface Onclick {
 
 }
