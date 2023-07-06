@@ -23,11 +23,7 @@ class AccountFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.liveWallpapper.setOnClickListener { Toast.makeText(requireContext(),"Clicked Live",Toast.LENGTH_LONG).show() }
-        binding.friend.setOnClickListener { Toast.makeText(requireContext(),"Clicked Friend",Toast.LENGTH_LONG).show() }
-        binding.feedback.setOnClickListener { Toast.makeText(requireContext(),"Clicked feedback",Toast.LENGTH_LONG).show() }
-        binding.helpCenter.setOnClickListener { Toast.makeText(requireContext(),"Clicked help",Toast.LENGTH_LONG).show() }
-        binding.about.setOnClickListener { Toast.makeText(requireContext(),"Clicked about",Toast.LENGTH_LONG).show() }
+
     }
 
 }
