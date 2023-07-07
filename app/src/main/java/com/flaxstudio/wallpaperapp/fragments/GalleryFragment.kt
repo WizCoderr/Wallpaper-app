@@ -2,38 +2,31 @@ package com.flaxstudio.wallpaperapp.fragments
 
 import android.content.Context
 import android.os.Bundle
+import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.flaxstudio.wallpaperapp.R
 import com.flaxstudio.wallpaperapp.adapters.CollectionRecyclerViewAdapter
-import com.flaxstudio.wallpaperapp.databinding.FragmentCollectionBinding
+import com.flaxstudio.wallpaperapp.databinding.FragmentGalleryBinding
 
-
-class CollectionFragment : Fragment() {
-private lateinit var binding: FragmentCollectionBinding
-private lateinit var thisContext : Context
+class GalleryFragment : Fragment() {
+    private lateinit var binding : FragmentGalleryBinding
+    private lateinit var thisContext : Context
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View{
-        // Inflate the layout for this fragment
-        binding = FragmentCollectionBinding.inflate(inflater ,container , false )
+    ): View? {
+        binding =  FragmentGalleryBinding.inflate(layoutInflater , container ,false)
         thisContext = requireContext()
         return binding.root
-
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        binding.backBtn.setOnClickListener{findNavController().popBackStack()}
-
-
         val adapter = CollectionRecyclerViewAdapter(thisContext)
         val rv = binding.rvItem
         val  gridLayoutManager = GridLayoutManager(thisContext , 3)
@@ -41,7 +34,7 @@ private lateinit var thisContext : Context
         rv.layoutManager =  gridLayoutManager
 
         adapter.setOnClickListener {
-            findNavController().navigate(R.id.action_collectionFragment_to_downloadFragment)
+            findNavController().navigate(R.id.action_homeFragment_to_downloadFragment)
         }
     }
 
