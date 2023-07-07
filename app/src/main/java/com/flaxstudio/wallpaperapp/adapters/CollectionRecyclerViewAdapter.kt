@@ -10,9 +10,25 @@ import com.bumptech.glide.Glide
 import com.flaxstudio.wallpaperapp.R
 
 class CollectionRecyclerViewAdapter(private val context : Context) : RecyclerView.Adapter<CollectionRecyclerViewAdapter.ViewHolder>() {
-    inner class ViewHolder(itemView : View) : RecyclerView.ViewHolder(itemView) {
+    private var itemClickListener:((position:Int )->Unit)? = null
 
+
+
+    fun setOnClickListener(callback:(position:Int)->Unit){
+        itemClickListener = callback
+    }
+    inner class ViewHolder(itemView : View) : RecyclerView.ViewHolder(itemView) {
         val image = itemView.findViewById<ImageView>(R.id.img)!!
+
+        init {
+            itemView.setOnClickListener {
+                val position = adapterPosition
+                if (position != RecyclerView.NO_POSITION) {
+                    itemClickListener?.invoke(position)
+                }
+            }
+
+        }
 
     }
 
@@ -28,7 +44,4 @@ class CollectionRecyclerViewAdapter(private val context : Context) : RecyclerVie
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         Glide.with(context).load(R.drawable.lovingone4).into(holder.image)
     }
-}
-interface Onclick {
-
 }

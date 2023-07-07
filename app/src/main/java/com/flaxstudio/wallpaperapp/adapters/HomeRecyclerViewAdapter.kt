@@ -12,29 +12,51 @@ import com.flaxstudio.wallpaperapp.R
 
 class HomeRecyclerViewAdapter(private val context: Context) : RecyclerView.Adapter<HomeRecyclerViewAdapter.ViewHolder>()  {
 
+    private var itemClickListener:((position:Int )->Unit)? = null
+
+
+    fun setOnClickListener(callback:(position:Int)->Unit){
+        itemClickListener = callback
+    }
+
+
     inner class ViewHolder(itemView : View) : RecyclerView.ViewHolder(itemView) {
-        val coverPhoto : ImageView = itemView.findViewById(R.id.coverPhoto)
-        val collectionName : TextView = itemView.findViewById(R.id.collection_name)
-        val totalImages : TextView = itemView.findViewById(R.id.total_image)
+        val coverPhoto: ImageView = itemView.findViewById(R.id.coverPhoto)
+        val collectionName: TextView = itemView.findViewById(R.id.collection_name)
+        val totalImages: TextView = itemView.findViewById(R.id.total_image)
+
+
+        init {
+            itemView.setOnClickListener {
+                val position = adapterPosition
+                if (position != RecyclerView.NO_POSITION) {
+                    itemClickListener?.invoke(position)
+                }
+            }
+
+        }
+
+
+
+
+
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.rv_collection_item , parent , false)
         return ViewHolder(view)
-
     }
 
     override fun getItemCount(): Int {
-       return 8
+        return 18
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-
         Glide.with(context).load(R.drawable.lovingone).into(holder.coverPhoto)
-
         holder.collectionName.text = "Animals"
         holder.totalImages.text = "1250 images"
 
-
     }
+
+
 }

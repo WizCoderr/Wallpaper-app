@@ -63,14 +63,15 @@
             android:textStyle="bold"/>
 
         <Button
+            android:id="@+id/get_premium"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@id/tv_pro"
             app:layout_constraintStart_toStartOf="@id/line"
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginHorizontal="20dp"
-            android:text="Get Premium"
-            android:visibility="gone"
+            android:text="@string/premium"
+            android:visibility="visible"
             android:layout_marginTop="8dp"
             android:textSize="@dimen/medium_text"
             android:backgroundTint="#4CAF50"
@@ -81,7 +82,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:visibility="visible"
+            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/line"
