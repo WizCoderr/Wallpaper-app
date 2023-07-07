@@ -8,6 +8,7 @@ import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.flaxstudio.wallpaperapp.R
+import com.flaxstudio.wallpaperapp.utils.WallpaperCategoryData
 
 class CollectionRecyclerViewAdapter(private val context : Context) : RecyclerView.Adapter<CollectionRecyclerViewAdapter.ViewHolder>() {
     private var itemClickListener:((position:Int )->Unit)? = null
@@ -38,10 +39,10 @@ class CollectionRecyclerViewAdapter(private val context : Context) : RecyclerVie
     }
 
     override fun getItemCount(): Int {
-        return 30
+        return 300
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        Glide.with(context).load(R.drawable.lovingone4).into(holder.image)
+        Glide.with(context).load(R.drawable.lovingone).into(holder.image)
     }
 }
