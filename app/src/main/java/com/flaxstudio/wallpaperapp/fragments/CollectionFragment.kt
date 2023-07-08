@@ -11,9 +11,9 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.flaxstudio.wallpaperapp.R
 import com.flaxstudio.wallpaperapp.adapters.CollectionRecyclerViewAdapter
-import com.flaxstudio.wallpaperapp.api.RetrofitClient.wallpaperApi
 import com.flaxstudio.wallpaperapp.databinding.FragmentCollectionBinding
-import com.flaxstudio.wallpaperapp.utils.WallpaperCategoryData
+import com.flaxstudio.wallpaperapp.source.api.RetrofitClient.wallpaperApi
+import com.flaxstudio.wallpaperapp.source.db.WallpaperCategoryData
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

@@ -25,6 +25,9 @@ class MainActivityViewModel(private val wallpaperRepository: WallpaperRepository
     fun insertWallpaper(wallpaperData: WallpaperData) = viewModelScope.launch(Dispatchers.Default) {
         wallpaperRepository.insertWallpaper(wallpaperData)
     }
+    suspend fun getAllCategories():Flow<List<WallpaperCategoryData>>{
+        return wallpaperRepository.getAllCategories()
+    }
 }
 class MainActivityViewModelFactory(private val projectRepository: WallpaperRepository) : ViewModelProvider.Factory {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
