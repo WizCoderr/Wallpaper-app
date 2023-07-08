@@ -8,7 +8,6 @@ import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.flaxstudio.wallpaperapp.R
-import com.flaxstudio.wallpaperapp.utils.WallpaperCategoryData
 
 class CollectionRecyclerViewAdapter(private val context : Context) : RecyclerView.Adapter<CollectionRecyclerViewAdapter.ViewHolder>() {
     private var itemClickListener:((position:Int )->Unit)? = null

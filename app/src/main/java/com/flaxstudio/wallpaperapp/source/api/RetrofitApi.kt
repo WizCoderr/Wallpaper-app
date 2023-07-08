@@ -1,7 +1,7 @@
-package com.flaxstudio.wallpaperapp.api
+package com.flaxstudio.wallpaperapp.source.api
 
-import com.flaxstudio.wallpaperapp.utils.WallpaperCategoryData
-import com.flaxstudio.wallpaperapp.utils.WallpaperData
+import com.flaxstudio.wallpaperapp.source.db.WallpaperCategoryData
+import com.flaxstudio.wallpaperapp.source.db.WallpaperData
 import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -12,7 +12,7 @@ import retrofit2.http.Query
 
 interface WallpaperApi {
     @GET("/public/category")
-    fun getWallpaperCategoryData(): Call<List<WallpaperCategoryData>>
+     fun getWallpaperCategoryData(): Call<List<WallpaperCategoryData>>
 
     @GET("/public/wallpapers")
     fun getWallpapersPerWallpaper(
