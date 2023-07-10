@@ -1,3 +1,5 @@
+package com.flaxstudio.wallpaperapp
+
 import android.app.Application
 import com.flaxstudio.wallpaperapp.source.db.WallpaperDatabase
 import com.flaxstudio.wallpaperapp.source.db.WallpaperRepository
