@@ -20,9 +20,11 @@ interface WallpaperApi {
         @Query("page") pageNo: Int
     ): Call<List<WallpaperData>>
 
-    @GET("/public/wallpaper/{wallpaperId}")
-    fun getWallpaperFromSearch(@Path("wallpaperId") wallpaperId: String): Call<WallpaperData>
-
+    @GET("/public/wallpaper/search/{search_query}/{page_no}")
+    fun searchWallpapers(
+        @Path("search_query") searchQuery: String,
+        @Path("page_no") pageNo: Int
+    ): List<WallpaperData>
 }
 
 object RetrofitClient {
