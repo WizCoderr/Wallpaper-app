@@ -1,7 +1,7 @@
 package com.flaxstudio.wallpaperapp.source.api
 
-import com.flaxstudio.wallpaperapp.source.db.WallpaperCategoryData
-import com.flaxstudio.wallpaperapp.source.db.WallpaperData
+import com.flaxstudio.wallpaperapp.source.database.WallpaperCategoryData
+import com.flaxstudio.wallpaperapp.source.database.WallpaperData
 import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory

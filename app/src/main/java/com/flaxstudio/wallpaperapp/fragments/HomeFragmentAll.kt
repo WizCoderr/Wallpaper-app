@@ -39,7 +39,7 @@ private lateinit var contextThis : Context
         binding.recyclerview.layoutManager = gridLayoutManager
 
 
-        adapter.setOnClickListener { position ->
+        adapter.setOnClickListener {
             findNavController().navigate(R.id.action_homeFragment_to_collectionFragment)
         }
 
