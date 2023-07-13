@@ -36,20 +36,20 @@ data class WallpaperData(
 @Dao
 interface WallpaperDao{
     @Query("SELECT * FROM WALLPAPERS")
-    suspend fun getAllWallpapers():Flow<List<WallpaperData>>
+     fun getAllWallpapers():Flow<List<WallpaperData>>
     @Insert
-    suspend fun insertWallpaper(wallpaperData: WallpaperData)
+     fun insertWallpaper(wallpaperData: WallpaperData)
 
     @Query("SELECT * FROM WALLPAPERS WHERE category_id = :category_id")
-    suspend fun getWallpapersCategorised(category_id: String):Flow<List<WallpaperData>>
+     fun getWallpapersCategorised(category_id: String):Flow<List<WallpaperData>>
 }
 class WallpaperRepo(private val wallpaperDao: WallpaperDao){
     @WorkerThread
-    suspend fun insertWallpaper(wallpaperData: WallpaperData){
+     fun insertWallpaper(wallpaperData: WallpaperData){
         wallpaperDao.insertWallpaper(wallpaperData)
     }
     @WorkerThread
-    suspend fun getAllWallpaper():Flow<List<WallpaperData>> = wallpaperDao.getAllWallpapers()
+     fun getAllWallpaper():Flow<List<WallpaperData>> = wallpaperDao.getAllWallpapers()
     @WorkerThread
-    suspend fun getWallpapersCategorised(category_id: String):Flow<List<WallpaperData>> = wallpaperDao.getWallpapersCategorised(category_id)
+    fun getWallpapersCategorised(category_id: String):Flow<List<WallpaperData>> = wallpaperDao.getWallpapersCategorised(category_id)
 }

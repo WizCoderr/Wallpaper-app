@@ -24,11 +24,11 @@ interface WallpaperApi {
     fun searchWallpapers(
         @Path("search_query") searchQuery: String,
         @Path("page_no") pageNo: Int
-    ): List<WallpaperData>
+    ):Call<List<WallpaperData>>
 }
 
 object RetrofitClient {
-    private const val BASE_URL = "https://wallpaperappbackend-1--wallpaper072.repl.co/"
+    private const val BASE_URL = "https://wallpaperappbackend-1.wallpaper072.repl.cor"
     private var retrofit: Retrofit? = null
     val wallpaperApi: WallpaperApi
         get() {

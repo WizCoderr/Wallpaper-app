@@ -18,15 +18,15 @@ data class WallpaperCategoryData(
 @Dao
 interface CategoryDao{
     @Query("SELECT * FROM wallpaperCategory")
-    suspend fun getAllCategory(): Flow<List<WallpaperCategoryData>>
+     fun getAllCategory(): Flow<List<WallpaperCategoryData>>
 
     @Insert
-    suspend fun insertData(categoryData: WallpaperCategoryData)
+     fun insertData(categoryData: List<WallpaperCategoryData>)
 }
 
 class CategoryRepo(private val categoryDao: CategoryDao){
-    suspend fun insertData(categoryData: WallpaperCategoryData) {
+     fun insertData(categoryData: List<WallpaperCategoryData>) {
         categoryDao.insertData(categoryData)
     }
-    suspend fun getAllCategory():Flow<List<WallpaperCategoryData>> = categoryDao.getAllCategory()
+     fun getAllCategory():Flow<List<WallpaperCategoryData>> = categoryDao.getAllCategory()
 }

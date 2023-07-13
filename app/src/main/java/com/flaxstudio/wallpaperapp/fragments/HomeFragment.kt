@@ -37,7 +37,7 @@ class HomeFragment : Fragment() {
         }
         binding.menuBtn.setOnClickListener{
 
-//            findNavController().navigate(R.id.action_homeFragment_to_collectionFragment)
+            findNavController().navigate(R.id.action_homeFragment_to_collectionFragment)
         }
 
 
