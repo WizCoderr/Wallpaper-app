@@ -10,7 +10,6 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.flaxstudio.wallpaperapp.ProjectApplication
-import com.flaxstudio.wallpaperapp.R
 import com.flaxstudio.wallpaperapp.adapters.CollectionRecyclerViewAdapter
 import com.flaxstudio.wallpaperapp.databinding.FragmentCollectionBinding
 import com.flaxstudio.wallpaperapp.source.fetchCategories
@@ -52,7 +51,7 @@ private lateinit var thisContext : Context
         rv.layoutManager =  gridLayoutManager
 
         adapter.setOnClickListener {
-            findNavController().navigate(R.id.action_collectionFragment_to_downloadFragment)
+           // findNavController().navigate(R.id.action_collectionFragment_to_downloadFragment)
         }
     }
 

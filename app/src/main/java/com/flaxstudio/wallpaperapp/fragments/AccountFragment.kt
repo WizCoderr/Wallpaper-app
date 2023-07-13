@@ -1,11 +1,10 @@
 package com.flaxstudio.wallpaperapp.fragments
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.flaxstudio.wallpaperapp.R
 import com.flaxstudio.wallpaperapp.databinding.FragmentAccountBinding
@@ -26,7 +25,7 @@ class AccountFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.getPremium.setOnClickListener {
-            findNavController().navigate(R.id.action_accountFragment_to_subscriptionFragment)
+            findNavController().navigate(R.id.action_hostFragment_to_subscriptionFragment)
         }
     }
 

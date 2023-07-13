@@ -36,7 +36,7 @@ class HomeFragment : Fragment() {
             findNavController().navigate(R.id.action_hostFragment_to_searchFragment)
         }
         binding.menuBtn.setOnClickListener{
-            findNavController().navigate(R.id.action_hostFragment_to_downloadFragment2)
+            findNavController().navigate(R.id.action_hostFragment_to_downloadFragmen)
 //            findNavController().navigate(R.id.action_homeFragment_to_collectionFragment)
         }
 

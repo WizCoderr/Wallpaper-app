@@ -6,28 +6,6 @@
     app:startDestination="@id/hostFragment">
 
     <fragment
-        android:id="@+id/accountFragment"
-        android:name="com.flaxstudio.wallpaperapp.fragments.AccountFragment"
-        android:label="fragment_account"
-        tools:layout="@layout/fragment_account" >
-        <action
-            android:id="@+id/action_accountFragment_to_subscriptionFragment"
-            app:destination="@id/subscriptionFragment"
-            app:enterAnim="@anim/nav_default_enter_anim"
-            app:exitAnim="@anim/nav_default_exit_anim"
-            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
-            app:popUpTo="@id/accountFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/collectionFragment"
-        android:name="com.flaxstudio.wallpaperapp.fragments.CollectionFragment"
-        android:label="fragment_collection"
-        tools:layout="@layout/fragment_collection" >
-        <action
-            android:id="@+id/action_collectionFragment_to_downloadFragment"
-            app:destination="@id/downloadFragment" />
-    </fragment>
-    <fragment
         android:id="@+id/downloadFragment"
         android:name="com.flaxstudio.wallpaperapp.fragments.DownloadFragment"
         android:label="fragment_download"
@@ -36,7 +14,12 @@
         android:id="@+id/searchFragment"
         android:name="com.flaxstudio.wallpaperapp.fragments.SearchFragment"
         android:label="fragment_search"
-        tools:layout="@layout/fragment_search" />
+        tools:layout="@layout/fragment_search" >
+        <action
+            android:id="@+id/action_searchFragment_to_downloadFragment"
+            app:destination="@id/downloadFragment"
+            app:popUpTo="@id/searchFragment" />
+    </fragment>
     <fragment
         android:id="@+id/subscriptionFragment"
         android:name="com.flaxstudio.wallpaperapp.fragments.SubscriptionFragment"
@@ -51,7 +34,12 @@
             android:id="@+id/action_hostFragment_to_searchFragment"
             app:destination="@id/searchFragment" />
         <action
-            android:id="@+id/action_hostFragment_to_downloadFragment2"
-            app:destination="@id/downloadFragment" />
+            android:id="@+id/action_hostFragment_to_downloadFragmen"
+            app:destination="@id/downloadFragment"
+            app:popUpTo="@id/hostFragment" />
+        <action
+            android:id="@+id/action_hostFragment_to_subscriptionFragment"
+            app:destination="@id/subscriptionFragment"
+            app:popUpTo="@id/hostFragment" />
     </fragment>
 </navigation>

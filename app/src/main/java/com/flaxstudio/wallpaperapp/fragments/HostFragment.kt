@@ -25,6 +25,10 @@ class HostFragment :Fragment() {
                      navigateToFragment(HomeFragment())
                     true
                 }
+                R.id.collections->{
+                    navigateToFragment(CollectionFragment())
+                    true
+                }
                 R.id.favourites -> {
                       navigateToFragment(CollectionFragment())
                     true
