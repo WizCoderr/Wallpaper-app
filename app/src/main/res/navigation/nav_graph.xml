@@ -3,26 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/homeFragment">
+    app:startDestination="@id/hostFragment">
 
-    <fragment
-        android:id="@+id/homeFragment"
-        android:name="com.flaxstudio.wallpaperapp.fragments.HomeFragment"
-        android:label="fragment_home"
-        tools:layout="@layout/fragment_home" >
-        <action
-            android:id="@+id/action_homeFragment_to_collectionFragment"
-            app:destination="@id/collectionFragment" />
-        <action
-            android:id="@+id/action_homeFragment_to_searchFragment"
-            app:destination="@id/searchFragment" />
-        <action
-            android:id="@+id/action_homeFragment_to_accountFragment"
-            app:destination="@id/accountFragment" />
-        <action
-            android:id="@+id/action_homeFragment_to_downloadFragment"
-            app:destination="@id/downloadFragment" />
-    </fragment>
     <fragment
         android:id="@+id/accountFragment"
         android:name="com.flaxstudio.wallpaperapp.fragments.AccountFragment"
@@ -60,4 +42,16 @@
         android:name="com.flaxstudio.wallpaperapp.fragments.SubscriptionFragment"
         android:label="fragment_subscription"
         tools:layout="@layout/fragment_subscription" />
+    <fragment
+        android:id="@+id/hostFragment"
+        android:name="com.flaxstudio.wallpaperapp.fragments.HostFragment"
+        android:label="fragment_host"
+        tools:layout="@layout/fragment_host" >
+        <action
+            android:id="@+id/action_hostFragment_to_searchFragment"
+            app:destination="@id/searchFragment" />
+        <action
+            android:id="@+id/action_hostFragment_to_downloadFragment2"
+            app:destination="@id/downloadFragment" />
+    </fragment>
 </navigation>

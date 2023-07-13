@@ -7,10 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.flaxstudio.wallpaperapp.ProjectApplication
-import com.flaxstudio.wallpaperapp.R
 import com.flaxstudio.wallpaperapp.adapters.HomeRecyclerViewAdapter
 import com.flaxstudio.wallpaperapp.databinding.FragmentHomeAllBinding
 import com.flaxstudio.wallpaperapp.viewmodel.MainActivityViewModel
@@ -49,9 +47,6 @@ private lateinit var contextThis : Context
         binding.recyclerview.layoutManager = gridLayoutManager
 
 
-        adapter.setOnClickListener {
-            findNavController().navigate(R.id.action_homeFragment_to_collectionFragment)
-        }
 
 
 

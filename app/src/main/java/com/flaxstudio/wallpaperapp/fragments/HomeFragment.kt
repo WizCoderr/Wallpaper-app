@@ -33,11 +33,11 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.searchBtn.setOnClickListener{
-            findNavController().navigate(R.id.action_homeFragment_to_searchFragment)
+            findNavController().navigate(R.id.action_hostFragment_to_searchFragment)
         }
         binding.menuBtn.setOnClickListener{
-
-            findNavController().navigate(R.id.action_homeFragment_to_collectionFragment)
+            findNavController().navigate(R.id.action_hostFragment_to_downloadFragment2)
+//            findNavController().navigate(R.id.action_homeFragment_to_collectionFragment)
         }
 
 

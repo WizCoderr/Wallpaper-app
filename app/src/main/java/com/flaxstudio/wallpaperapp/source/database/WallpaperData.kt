@@ -5,6 +5,7 @@ import androidx.room.Dao
 import androidx.room.Entity
 import androidx.room.ForeignKey
 import androidx.room.Insert
+import androidx.room.OnConflictStrategy
 import androidx.room.PrimaryKey
 import androidx.room.Query
 import kotlinx.coroutines.flow.Flow
@@ -37,7 +38,7 @@ data class WallpaperData(
 interface WallpaperDao{
     @Query("SELECT * FROM WALLPAPERS")
      fun getAllWallpapers():Flow<List<WallpaperData>>
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
      fun insertWallpaper(wallpaperData: WallpaperData)
 
     @Query("SELECT * FROM WALLPAPERS WHERE category_id = :category_id")

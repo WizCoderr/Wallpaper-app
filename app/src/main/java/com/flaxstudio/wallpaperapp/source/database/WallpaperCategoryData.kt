@@ -3,6 +3,7 @@ package com.flaxstudio.wallpaperapp.source.database
 import androidx.room.Dao
 import androidx.room.Entity
 import androidx.room.Insert
+import androidx.room.OnConflictStrategy
 import androidx.room.PrimaryKey
 import androidx.room.Query
 import kotlinx.coroutines.flow.Flow
@@ -20,7 +21,7 @@ interface CategoryDao{
     @Query("SELECT * FROM wallpaperCategory")
      fun getAllCategory(): Flow<List<WallpaperCategoryData>>
 
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
      fun insertData(categoryData: List<WallpaperCategoryData>)
 }
 
