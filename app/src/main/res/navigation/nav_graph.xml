@@ -41,5 +41,14 @@
             android:id="@+id/action_hostFragment_to_subscriptionFragment"
             app:destination="@id/subscriptionFragment"
             app:popUpTo="@id/hostFragment" />
+        <action
+            android:id="@+id/action_hostFragment_to_collectionFragment"
+            app:destination="@id/collectionFragment"
+            app:popUpTo="@id/hostFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/collectionFragment"
+        android:name="com.flaxstudio.wallpaperapp.fragments.CollectionFragment"
+        android:label="fragment_collection"
+        tools:layout="@layout/fragment_collection" />
 </navigation>
