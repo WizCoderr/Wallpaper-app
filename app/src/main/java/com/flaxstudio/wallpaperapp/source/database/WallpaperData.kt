@@ -23,14 +23,14 @@ import kotlinx.coroutines.flow.Flow
 data class WallpaperData(
     @PrimaryKey val _id: String,
     val category_id: String,
-    val created_at: Int,
-    val width: Int,
-    val height: Int,
+    val created_at: Long,
+    val width: Long,
+    val height: Long,
     val color: String,
     val blur_hash: String,
     val description: String,
     val image_url: String,
-    val likes: Int,
+    val likes: Long,
     val is_premium: Boolean
 )
 

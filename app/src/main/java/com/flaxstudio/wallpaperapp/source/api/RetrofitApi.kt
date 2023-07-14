@@ -28,7 +28,7 @@ interface WallpaperApi {
 }
 
 object RetrofitClient {
-    private const val BASE_URL = "https://wallpaperappbackend-1.wallpaper072.repl.cor"
+    private const val BASE_URL = "https://wallpaperappbackend-1--wallpaper072.repl.co"
     private var retrofit: Retrofit? = null
     val wallpaperApi: WallpaperApi
         get() {

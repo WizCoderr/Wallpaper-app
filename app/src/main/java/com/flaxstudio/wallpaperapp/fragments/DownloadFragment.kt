@@ -5,7 +5,6 @@ import android.app.WallpaperManager
 import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.Color
-import android.graphics.drawable.BitmapDrawable
 import android.os.Bundle
 import android.os.Environment
 import android.util.Log
@@ -16,9 +15,11 @@ import android.view.ViewGroup
 import android.widget.RadioGroup
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import androidx.core.graphics.drawable.toBitmap
 import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import com.bumptech.glide.Glide
 import com.flaxstudio.wallpaperapp.R
 import com.flaxstudio.wallpaperapp.databinding.FragmentDownloadBinding
 import com.flaxstudio.wallpaperapp.utils.setWallpaperForHomeScreen
@@ -30,6 +31,8 @@ class DownloadFragment : Fragment() {
     private lateinit var binding: FragmentDownloadBinding
     private lateinit var bitmap: Bitmap
     private lateinit var thisContext: Context
+    private lateinit var data:String
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
@@ -40,15 +43,17 @@ class DownloadFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         thisContext = requireContext()
-        bitmap = (binding.wallpaper.drawable as BitmapDrawable).bitmap
+        data = requireArguments().getString("image").toString()
+        Log.i("TAG", "onViewCreated: $data")
+        Glide.with(thisContext).load(data).into(binding.wallpaper)
         binding.backBtn.setOnClickListener { findNavController().popBackStack() }
-        binding.setWallpaper.setOnClickListener { setAsWallpaper(bitmap) }
+        binding.setWallpaper.setOnClickListener {
+            bitmap = binding.wallpaper.drawable.toBitmap()
+            setAsWallpaper(bitmap)
+        }
         binding.btnDownload.setOnClickListener {
             Toast.makeText(thisContext, "Downloading...", Toast.LENGTH_SHORT).show()
-            downloadImage(
-                thisContext,
-                "https://images.unsplash.com/photo-1655705247374-02e5e9a2bbec"
-            )
+            downloadImage(thisContext, data)
         }
 
     }

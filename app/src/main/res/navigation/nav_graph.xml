@@ -9,7 +9,11 @@
         android:id="@+id/downloadFragment"
         android:name="com.flaxstudio.wallpaperapp.fragments.DownloadFragment"
         android:label="fragment_download"
-        tools:layout="@layout/fragment_download" />
+        tools:layout="@layout/fragment_download">
+        <argument
+            android:name="imgUrl"
+            app:argType="string"/>
+    </fragment>
     <fragment
         android:id="@+id/searchFragment"
         android:name="com.flaxstudio.wallpaperapp.fragments.SearchFragment"

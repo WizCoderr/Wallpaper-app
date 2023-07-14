@@ -18,6 +18,8 @@ class MainActivityViewModel(private val wallpaperRepo: WallpaperRepo,private val
         categoryRepo.insertData(categoryData)
     }
 
+    fun getAllCategories():Flow<List<WallpaperCategoryData>> = categoryRepo.getAllCategory()
+
      fun getAllWallpapers():Flow<List<WallpaperData>> = wallpaperRepo.getAllWallpaper()
      fun getWallpapersCategorised(categoryId:String):Flow<List<WallpaperData>> = wallpaperRepo.getWallpapersCategorised(categoryId)
 }
