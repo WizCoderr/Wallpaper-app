@@ -12,7 +12,6 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.flaxstudio.wallpaperapp.ProjectApplication
 import com.flaxstudio.wallpaperapp.adapters.CollectionRecyclerViewAdapter
 import com.flaxstudio.wallpaperapp.databinding.FragmentCollectionBinding
-import com.flaxstudio.wallpaperapp.source.fetchCategories
 import com.flaxstudio.wallpaperapp.viewmodel.MainActivityViewModel
 import com.flaxstudio.wallpaperapp.viewmodel.MainActivityViewModelFactory
 
@@ -41,7 +40,6 @@ private lateinit var thisContext : Context
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        fetchCategories(mainActivityViewModel)
         binding.backBtn.setOnClickListener{findNavController().popBackStack()}
 
         val adapter = CollectionRecyclerViewAdapter(thisContext)

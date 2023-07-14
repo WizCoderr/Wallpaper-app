@@ -16,7 +16,7 @@ class HomeFragment : Fragment() {
 
     private lateinit var binding: FragmentHomeBinding
 
-    private val tabTitles = arrayListOf("Nature" , "Space" , "Buildings", "Animals")
+    private val tabTitles = arrayListOf("All","Nature" , "Space" , "Buildings", "Animals")
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

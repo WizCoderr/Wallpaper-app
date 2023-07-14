@@ -23,7 +23,6 @@ class HomeRecyclerViewAdapter(private val context: Context) : RecyclerView.Adapt
     inner class ViewHolder(itemView : View) : RecyclerView.ViewHolder(itemView) {
         val coverPhoto: ImageView = itemView.findViewById(R.id.coverPhoto)
         val collectionName: TextView = itemView.findViewById(R.id.collection_name)
-        val totalImages: TextView = itemView.findViewById(R.id.total_image)
 
 
         init {
@@ -54,7 +53,6 @@ class HomeRecyclerViewAdapter(private val context: Context) : RecyclerView.Adapt
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         Glide.with(context).load(R.drawable.lovingone).into(holder.coverPhoto)
         holder.collectionName.text = "Animals"
-        holder.totalImages.text = "1250 images"
 
     }
 
