@@ -7,6 +7,8 @@
     }
     apply plugin: 'com.google.gms.google-services'
 
+
+
     android {
         namespace 'com.flaxstudio.wallpaperapp'
         compileSdk 33
@@ -38,7 +40,10 @@
         kotlinOptions {
             jvmTarget = '17'
         }
+
+
     }
+
 
     dependencies {
 
@@ -79,6 +84,10 @@
         implementation 'com.google.firebase:firebase-auth-ktx'
         implementation 'com.google.android.gms:play-services-auth:20.6.0'
         implementation 'com.google.firebase:firebase-firestore-ktx:24.6.1'
+
+
+        // Payment integration
+        implementation 'com.razorpay:checkout:1.6.33'
 
 
 

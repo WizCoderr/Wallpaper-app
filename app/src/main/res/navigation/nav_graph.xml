@@ -25,11 +25,6 @@
             app:popUpTo="@id/searchFragment" />
     </fragment>
     <fragment
-        android:id="@+id/subscriptionFragment"
-        android:name="com.flaxstudio.wallpaperapp.fragments.SubscriptionFragment"
-        android:label="fragment_subscription"
-        tools:layout="@layout/fragment_subscription" />
-    <fragment
         android:id="@+id/hostFragment"
         android:name="com.flaxstudio.wallpaperapp.fragments.HostFragment"
         android:label="fragment_host"
@@ -40,10 +35,6 @@
         <action
             android:id="@+id/action_hostFragment_to_downloadFragmen"
             app:destination="@id/downloadFragment"
-            app:popUpTo="@id/hostFragment" />
-        <action
-            android:id="@+id/action_hostFragment_to_subscriptionFragment"
-            app:destination="@id/subscriptionFragment"
             app:popUpTo="@id/hostFragment" />
         <action
             android:id="@+id/action_hostFragment_to_collectionFragment"
