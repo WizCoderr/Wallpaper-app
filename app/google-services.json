@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "797056517970",
+    "project_id": "wallpaper-app-1aa6f",
+    "storage_bucket": "wallpaper-app-1aa6f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:797056517970:android:3444e81b0da22d7ff05c8b",
+        "android_client_info": {
+          "package_name": "com.flaxstudio.wallpaperapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "797056517970-pjja20i4lsduet0gmch1josp8n3rsg36.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.flaxstudio.wallpaperapp",
+            "certificate_hash": "73121984c1d2294631ccaa209e4c34fa95efad0e"
+          }
+        },
+        {
+          "client_id": "797056517970-52g5043kd3ojngm5rhjn5r2a34brocrs.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCl027uTkLZvYsjmKUJgXa9zF_6I7hSUqI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "797056517970-52g5043kd3ojngm5rhjn5r2a34brocrs.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

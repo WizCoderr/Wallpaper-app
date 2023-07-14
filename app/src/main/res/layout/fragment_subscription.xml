@@ -63,6 +63,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_premium"
             app:layout_constraintEnd_toStartOf="@id/plan2"
+            android:background="@drawable/plan_selector"
             android:layout_marginTop="40dp"
             android:orientation="vertical">
 
@@ -148,6 +149,7 @@
             android:layout_height="wrap_content"
             app:layout_constraintStart_toEndOf="@id/plan2"
             app:layout_constraintTop_toTopOf="@id/plan2"
+            android:background="@drawable/plan_selector"
             app:layout_constraintEnd_toEndOf="parent"
             android:orientation="vertical">
 
