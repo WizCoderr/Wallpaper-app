@@ -4,12 +4,12 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.flaxstudio.wallpaperapp.R
+import com.flaxstudio.wallpaperapp.source.database.WallpaperData
 
-class CollectionRecyclerViewAdapter(private val context : Context) : RecyclerView.Adapter<CollectionRecyclerViewAdapter.ViewHolder>() {
+class CollectionRecyclerViewAdapter(private val context : Context,private val data:List<WallpaperData>) : RecyclerView.Adapter<CollectionRecyclerViewAdapter.ViewHolder>() {
     private var itemClickListener:((position:Int )->Unit)? = null
 
 
@@ -18,30 +18,21 @@ class CollectionRecyclerViewAdapter(private val context : Context) : RecyclerVie
         itemClickListener = callback
     }
     inner class ViewHolder(itemView : View) : RecyclerView.ViewHolder(itemView) {
-        val image = itemView.findViewById<ImageView>(R.id.img)!!
 
-        init {
+        fun bind(data: WallpaperData){
+            Glide.with(context).load(data.image_url).into( itemView.findViewById(R.id.img))
             itemView.setOnClickListener {
                 val position = adapterPosition
                 if (position != RecyclerView.NO_POSITION) {
                     itemClickListener?.invoke(position)
                 }
             }
-
         }
-
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.collection_item , parent , false)
-        return ViewHolder(view)
-    }
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder =ViewHolder( LayoutInflater.from(parent.context).inflate(R.layout.collection_item , parent , false))
 
-    override fun getItemCount(): Int {
-        return 300
-    }
+    override fun getItemCount(): Int = data.size
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        Glide.with(context).load(R.drawable.lovingone).into(holder.image)
-    }
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) =holder.bind(data[position])
 }

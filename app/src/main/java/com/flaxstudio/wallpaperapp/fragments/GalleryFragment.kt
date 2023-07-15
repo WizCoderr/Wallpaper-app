@@ -27,7 +27,7 @@ class GalleryFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val adapter = CollectionRecyclerViewAdapter(thisContext)
+        val adapter = CollectionRecyclerViewAdapter(thisContext, emptyList())
         val rv = binding.rvItem
         val  gridLayoutManager = GridLayoutManager(thisContext , 3)
         rv.adapter = adapter

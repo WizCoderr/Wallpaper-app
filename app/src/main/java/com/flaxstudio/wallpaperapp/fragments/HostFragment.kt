@@ -26,7 +26,7 @@ class HostFragment :Fragment() {
                     true
                 }
                 R.id.collections->{
-                    navigateToFragment(GalleryFragment())
+                    navigateToFragment(AllWallpaperFragment())
                     true
                 }
                 R.id.favourites -> {

@@ -37,8 +37,8 @@ class SearchFragment : Fragment() {
         binding.search.setOnClickListener { loadNextWallpapers(binding.searchEditText.text.toString(),currentPage)}
         binding.backBtn.setOnClickListener { findNavController().popBackStack() }
     }
-    private var currentPage = 1 // Keep track of the current page or batch of dataprivate var currentPage = 1 // Keep track of the current page or batch of data
-    private var requestCount = 0 // Keep track of the number of requests made
+    private var currentPage = 1
+    private var requestCount = 0
     private val wallpaperDataList = mutableListOf<WallpaperData>()
 
     private fun getSearchData(query: String, size: Int) {

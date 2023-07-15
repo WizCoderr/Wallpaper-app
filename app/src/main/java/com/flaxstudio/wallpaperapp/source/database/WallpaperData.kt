@@ -39,14 +39,14 @@ interface WallpaperDao{
     @Query("SELECT * FROM WALLPAPERS")
      fun getAllWallpapers():Flow<List<WallpaperData>>
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-     fun insertWallpaper(wallpaperData: WallpaperData)
+     fun insertWallpaper(wallpaperData: List<WallpaperData>)
 
     @Query("SELECT * FROM WALLPAPERS WHERE category_id = :category_id")
      fun getWallpapersCategorised(category_id: String):Flow<List<WallpaperData>>
 }
 class WallpaperRepo(private val wallpaperDao: WallpaperDao){
     @WorkerThread
-     fun insertWallpaper(wallpaperData: WallpaperData){
+     fun insertWallpaper(wallpaperData: List<WallpaperData>){
         wallpaperDao.insertWallpaper(wallpaperData)
     }
     @WorkerThread
