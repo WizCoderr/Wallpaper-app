@@ -8,8 +8,10 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.flaxstudio.wallpaperapp.ProjectApplication
+import com.flaxstudio.wallpaperapp.R
 import com.flaxstudio.wallpaperapp.adapters.CollectionRecyclerViewAdapter
 import com.flaxstudio.wallpaperapp.databinding.FragmentAllWallpaperBinding
 import com.flaxstudio.wallpaperapp.viewmodel.MainActivityViewModel
@@ -38,9 +40,15 @@ class AllWallpaperFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         lifecycleScope.launch {
             val data = mainActivityViewModel.getAllWallpapers().first()
+            val adapters = CollectionRecyclerViewAdapter(thisContext,data)
             allWallpaperBinding.rvItem.apply {
-                adapter = CollectionRecyclerViewAdapter(thisContext,data)
+                adapter = adapters
                 layoutManager = GridLayoutManager(thisContext,3)
+                adapters.setOnClickListener {
+                    val bundle = Bundle()
+                    bundle.putString("image",data[it].image_url)
+                    findNavController().navigate(R.id.action_collectionFragment_to_downloadFragment,bundle)
+                }
             }
         }
     }

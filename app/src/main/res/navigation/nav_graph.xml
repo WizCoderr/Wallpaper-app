@@ -39,11 +39,24 @@
         <action
             android:id="@+id/action_hostFragment_to_collectionFragment"
             app:destination="@id/collectionFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim"
             app:popUpTo="@id/hostFragment" />
     </fragment>
     <fragment
         android:id="@+id/collectionFragment"
         android:name="com.flaxstudio.wallpaperapp.fragments.CollectionFragment"
         android:label="fragment_collection"
-        tools:layout="@layout/fragment_collection" />
+        tools:layout="@layout/fragment_collection" >
+        <action
+            android:id="@+id/action_collectionFragment_to_downloadFragment"
+            app:destination="@id/downloadFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim"
+            app:popUpTo="@id/collectionFragment" />
+    </fragment>
 </navigation>
