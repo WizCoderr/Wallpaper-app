@@ -31,36 +31,18 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/menu_btn"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:background="@android:color/transparent"
-                android:contentDescription="g"
-                android:minWidth="48dp"
-                android:minHeight="48dp"
-                app:backgroundTint="@android:color/transparent"
-                app:iconTint="@color/black"
-                app:iconGravity="textStart"
-                app:iconPadding="0dp"
-                app:icon="@drawable/menu_icon"
-                android:rotationY="180"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:ellipsize="end"
                 android:maxLines="1"
                 android:text="@string/app_name"
+                android:textAlignment="center"
                 android:textColor="@color/black"
                 android:textSize="20sp"
-                android:textAlignment="center"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toEndOf="@id/menu_btn"
                 app:layout_constraintEnd_toStartOf="@id/search_btn"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <com.google.android.material.button.MaterialButton

@@ -12,7 +12,7 @@ import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.RadioGroup
+import android.widget.ListView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.core.graphics.drawable.toBitmap
@@ -21,10 +21,11 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.flaxstudio.wallpaperapp.R
+import com.flaxstudio.wallpaperapp.adapters.WallpaperAdapter
 import com.flaxstudio.wallpaperapp.databinding.FragmentDownloadBinding
+import com.flaxstudio.wallpaperapp.utils.DownloadItems
 import com.flaxstudio.wallpaperapp.utils.setWallpaperForHomeScreen
 import com.flaxstudio.wallpaperapp.utils.setWallpaperForLockScreen
-import com.google.android.material.button.MaterialButton
 
 
 class DownloadFragment : Fragment() {
@@ -51,10 +52,6 @@ class DownloadFragment : Fragment() {
             bitmap = binding.wallpaper.drawable.toBitmap()
             setAsWallpaper(bitmap)
         }
-        binding.btnDownload.setOnClickListener {
-            Toast.makeText(thisContext, "Downloading...", Toast.LENGTH_SHORT).show()
-            downloadImage(thisContext, data)
-        }
 
     }
 
@@ -66,26 +63,36 @@ class DownloadFragment : Fragment() {
 
         val dialog = builder.create()
         dialog.window?.setGravity(Gravity.BOTTOM)
+        dialog.window!!.attributes.windowAnimations = R.style.PopupAnimation
         dialog.window?.statusBarColor = Color.TRANSPARENT
         dialog.show()
-        val radioButton = dialog.findViewById<RadioGroup>(R.id.group_btn)
-        dialog.findViewById<MaterialButton>(R.id.apply_btn)?.setOnClickListener {
-            val checkedRadioButtonId = radioButton?.checkedRadioButtonId
-            if (checkedRadioButtonId == R.id.both_wallpaper) {
-                WallpaperManager.getInstance(thisContext).setBitmap(bitmap)
-                Toast.makeText(context,"Wallpaper set Successfully",Toast.LENGTH_LONG).show()
-                dialog.dismiss()
+        val arrayList = listOf(
+            DownloadItems(R.drawable.icon_wallpaper,"SET AS WALLPAPER"),
+            DownloadItems(R.drawable.icon_both,"SET BOTH"),
+            DownloadItems(R.drawable.icon_lock,"SET LOCK SCREEN WALLPAPER"),
+            DownloadItems(R.drawable.icon_download,"DOWNLOAD WALLPAPER")
+        )
+       dialogView.findViewById<ListView>(R.id.listViewWallpaper).adapter = WallpaperAdapter(thisContext,arrayList)
+       dialogView.findViewById<ListView>(R.id.listViewWallpaper).setOnItemClickListener { _, _, position, _ ->
+           when(arrayList[position]){
+               arrayList[0]->{
+                   WallpaperManager.getInstance(thisContext).setWallpaperForHomeScreen(thisContext,bitmap)
+               }
+               arrayList[1]->{
+                   WallpaperManager.getInstance(thisContext).setWallpaperForHomeScreen(thisContext,bitmap)
+                   WallpaperManager.getInstance(thisContext).setWallpaperForLockScreen(thisContext,bitmap)
 
-            } else if (checkedRadioButtonId == R.id.homeScreen) {
-                setWallpaperForHomeScreen(thisContext, bitmap)
-                dialog.dismiss()
+               }
+               arrayList[2]->{
+                   WallpaperManager.getInstance(thisContext).setWallpaperForLockScreen(thisContext,bitmap)
 
-            } else if (checkedRadioButtonId == R.id.lockScreen) {
-                setWallpaperForLockScreen(thisContext, bitmap)
-                dialog.dismiss()
-
-            }
-        }
+               }
+               arrayList[3]->{
+                   Toast.makeText(thisContext, "Downloading...", Toast.LENGTH_SHORT).show()
+                   downloadImage(thisContext, data)
+               }
+           }
+       }
     }
 
     private fun downloadImage(context: Context, url: String): Long {

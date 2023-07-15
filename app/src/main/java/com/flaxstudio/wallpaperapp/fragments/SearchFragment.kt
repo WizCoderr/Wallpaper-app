@@ -9,7 +9,6 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.flaxstudio.wallpaperapp.adapters.SearchListAdapter
 import com.flaxstudio.wallpaperapp.databinding.FragmentSearchBinding
 import com.flaxstudio.wallpaperapp.source.api.RetrofitClient
@@ -26,7 +25,7 @@ class SearchFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View{
         // Inflate the layout for this fragment
         binding = FragmentSearchBinding.inflate(inflater , container ,false)
         return binding.root
@@ -35,13 +34,14 @@ class SearchFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         thisContext = requireContext()
-        binding.search.setOnClickListener { getSearchData(binding.searchEditText.text.toString(),currentPage)}
+        binding.search.setOnClickListener { loadNextWallpapers(binding.searchEditText.text.toString(),currentPage)}
         binding.backBtn.setOnClickListener { findNavController().popBackStack() }
     }
-    private var wallpaperDataList = mutableListOf<WallpaperData>()
-    private var currentPage = 1
+    private var currentPage = 1 // Keep track of the current page or batch of dataprivate var currentPage = 1 // Keep track of the current page or batch of data
+    private var requestCount = 0 // Keep track of the number of requests made
+    private val wallpaperDataList = mutableListOf<WallpaperData>()
 
-    private fun getSearchData(query: String,size:Int) {
+    private fun getSearchData(query: String, size: Int) {
         RetrofitClient.wallpaperApi.searchWallpapers(query, size).enqueue(object :
             Callback<List<WallpaperData>> {
             override fun onResponse(
@@ -49,7 +49,6 @@ class SearchFragment : Fragment() {
                 response: Response<List<WallpaperData>>
             ) {
                 if (response.isSuccessful) {
-                    setupScrollListener()
                     val result = response.body()
                     if (result.isNullOrEmpty()) {
                         // No wallpapers left to load
@@ -58,8 +57,12 @@ class SearchFragment : Fragment() {
 
                     wallpaperDataList.addAll(result)
                     updateAdapter()
-                    if (wallpaperDataList.size == 30){
-                        getSearchData(query,currentPage++)
+
+                    requestCount++ // Increment the request count
+
+                    if (requestCount == 30) {
+                        requestCount = 0 // Reset the request count
+                        currentPage++ // Increment the current page
                     }
                 }
             }
@@ -71,26 +74,18 @@ class SearchFragment : Fragment() {
     }
 
     private fun updateAdapter() {
-        binding.searchList.apply {
-            adapter = SearchListAdapter(thisContext, wallpaperDataList)
-            // Update the adapter with the new data
-            layoutManager = GridLayoutManager(thisContext, 3)
+        binding.searchList.apply{
+            adapter = SearchListAdapter(thisContext,wallpaperDataList)
+            layoutManager = GridLayoutManager(thisContext,3)
         }
     }
 
-    private fun setupScrollListener() {
-        binding.searchList.addOnScrollListener(object : RecyclerView.OnScrollListener() {
-            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-                val layoutManager = recyclerView.layoutManager as GridLayoutManager
-                val visibleItemCount = layoutManager.childCount
-                val totalItemCount = layoutManager.itemCount
-                val firstVisibleItemPosition = layoutManager.findFirstVisibleItemPosition()
-
-                if (visibleItemCount + firstVisibleItemPosition >= totalItemCount && firstVisibleItemPosition >= 0) {
-                    val query = binding.searchEditText.text.toString()
-                    getSearchData(query,currentPage)
-                }
-            }
-        })
+    // Call this function to load the next 30 wallpapers
+    private fun loadNextWallpapers(query: String,size: Int) {
+        if (requestCount == 0 && currentPage >= 1) {
+            getSearchData(query, size)
+        }
     }
+
+
 }

@@ -9,8 +9,9 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.flaxstudio.wallpaperapp.R
+import com.flaxstudio.wallpaperapp.source.database.WallpaperCategoryData
 
-class HomeRecyclerViewAdapter(private val context: Context) : RecyclerView.Adapter<HomeRecyclerViewAdapter.ViewHolder>()  {
+class HomeRecyclerViewAdapter(private val context: Context,collectionList: List<WallpaperCategoryData>) : RecyclerView.Adapter<HomeRecyclerViewAdapter.ViewHolder>()  {
 
     private var itemClickListener:((position:Int )->Unit)? = null
 

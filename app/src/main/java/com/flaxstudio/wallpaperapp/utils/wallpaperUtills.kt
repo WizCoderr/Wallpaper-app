@@ -6,7 +6,7 @@ import android.graphics.Bitmap
 import android.os.Build
 import android.widget.Toast
 
-fun setWallpaperForHomeScreen(context: Context, bitmap: Bitmap){
+fun WallpaperManager.setWallpaperForHomeScreen(context: Context, bitmap: Bitmap){
     if (Build.VERSION.SDK_INT>=Build.VERSION_CODES.N){
         WallpaperManager.getInstance(context).setBitmap(bitmap, null,true,WallpaperManager.FLAG_SYSTEM)
     }else
@@ -14,7 +14,7 @@ fun setWallpaperForHomeScreen(context: Context, bitmap: Bitmap){
     Toast.makeText(context,"Wallpaper set Successfully to Home Screen", Toast.LENGTH_LONG).show()
 
 }
-fun setWallpaperForLockScreen(context: Context, bitmap: Bitmap){
+fun WallpaperManager.setWallpaperForLockScreen(context: Context, bitmap: Bitmap){
     if (Build.VERSION.SDK_INT>=Build.VERSION_CODES.N){
         WallpaperManager.getInstance(context).setBitmap(bitmap, null,true,WallpaperManager.FLAG_LOCK)
     }else
