@@ -9,6 +9,11 @@ import com.flaxstudio.wallpaperapp.source.database.CategoryRepo
 import com.flaxstudio.wallpaperapp.source.database.WallpaperCategoryData
 import com.flaxstudio.wallpaperapp.source.database.WallpaperData
 import com.flaxstudio.wallpaperapp.source.database.WallpaperRepo
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Deferred
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.async
+import kotlinx.coroutines.awaitAll
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
 import retrofit2.Call
@@ -47,34 +52,42 @@ class MainActivityViewModel(private val wallpaperRepo: WallpaperRepo,private val
         return categoryRepo.getAllCategory()
     }
     private fun getWallpapers(categoryId: String) {
-        for (page in 1..80) {
-            RetrofitClient.wallpaperApi.getWallpapersPerWallpaper(categoryId, page).enqueue(object : Callback<List<WallpaperData>> {
-                override fun onResponse(call: Call<List<WallpaperData>>, response: Response<List<WallpaperData>>) {
-                    if (response.isSuccessful) {
-                        val result = response.body()
-                        if (result.isNullOrEmpty()) {
-                            // No wallpapers found for this page
-                            return
-                        }
+        val totalPages = 80
+        val batchSize = 10 // Number of API calls to be made in parallel
 
-                       viewModelScope.launch {
-                           wallpaperRepo.insertWallpaper(result)
-                       }
+        val scope = CoroutineScope(Dispatchers.IO)
+        val deferredResults = mutableListOf<Deferred<Response<List<WallpaperData>>>>()
 
-                        if (page == 80) {
-                            // All pages have been loaded
-                            // Perform any final actions or UI updates
-                            return
+        scope.launch {
+            for (batch in 1..(totalPages / batchSize)) {
+                Log.d("TAG", "getWallpapers: $batch")
+                val startPage = (batch - 1) * batchSize + 1
+                val endPage = minOf(batch * batchSize, totalPages)
+
+                for (page in startPage..endPage) {
+                    val deferred = async {
+                        RetrofitClient.wallpaperApi.getWallpapersPerWallpaper(categoryId, page).execute()
+                    }
+                    deferredResults.add(deferred)
+                }
+
+                val responses = deferredResults.awaitAll()
+
+                viewModelScope.launch {
+                    responses.forEachIndexed { index, response ->
+                        if (response.isSuccessful) {
+                            val result = response.body()
+                            if (!result.isNullOrEmpty()) {
+                                wallpaperRepo.insertWallpaper(result)
+                            }
+                        } else {
+                            // Handle API call failure
                         }
-                    } else {
-                        // Handle API call failure
                     }
                 }
 
-                override fun onFailure(call: Call<List<WallpaperData>>, t: Throwable) {
-                    // Handle API call failure
-                }
-            })
+                deferredResults.clear()
+            }
         }
     }
 

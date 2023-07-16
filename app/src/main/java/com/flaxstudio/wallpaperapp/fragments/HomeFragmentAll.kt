@@ -53,7 +53,7 @@ private lateinit var contextThis : Context
                 adapters.setOnClickListener {
                     val bundle = Bundle()
                     bundle.putString("categoryId",datas[it]._id)
-                    bundle.getString("categoryName",datas[it].title)
+                    bundle.putString("categoryName",datas[it].title)
                     findNavController().navigate(R.id.action_hostFragment_to_collectionFragment,bundle)
                 }
             }

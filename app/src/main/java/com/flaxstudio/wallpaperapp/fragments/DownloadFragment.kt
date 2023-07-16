@@ -44,7 +44,10 @@ class DownloadFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         thisContext = requireContext()
-        data = requireArguments().getString("image").toString()
+        when(requireArguments().getInt("collect")){
+            0-> data = requireArguments().getString("image").toString()
+            1-> data = requireArguments().getString("categoryImg").toString()
+        }
         Log.i("TAG", "onViewCreated: $data")
         Glide.with(thisContext).load(data).into(binding.wallpaper)
         binding.backBtn.setOnClickListener { findNavController().popBackStack() }

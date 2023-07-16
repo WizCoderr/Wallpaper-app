@@ -23,6 +23,7 @@ class SearchListAdapter(private val context: Context,private val searchData:List
                 if (position != RecyclerView.NO_POSITION) {
                     val bundle = Bundle()
                     bundle.putString("image",data.image_url)
+                    bundle.putInt("collect",0)
                     Navigation.findNavController(itemView).navigate(R.id.action_searchFragment_to_downloadFragment,bundle)
                 }
             }

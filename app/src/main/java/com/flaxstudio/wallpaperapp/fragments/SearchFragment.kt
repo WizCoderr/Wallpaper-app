@@ -7,21 +7,36 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
+import com.flaxstudio.wallpaperapp.ProjectApplication
 import com.flaxstudio.wallpaperapp.adapters.SearchListAdapter
 import com.flaxstudio.wallpaperapp.databinding.FragmentSearchBinding
 import com.flaxstudio.wallpaperapp.source.api.RetrofitClient
 import com.flaxstudio.wallpaperapp.source.database.WallpaperData
-import retrofit2.Call
-import retrofit2.Callback
+import com.flaxstudio.wallpaperapp.viewmodel.MainActivityViewModel
+import com.flaxstudio.wallpaperapp.viewmodel.MainActivityViewModelFactory
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Deferred
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.async
+import kotlinx.coroutines.awaitAll
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 import retrofit2.Response
 
 
 class SearchFragment : Fragment() {
     private lateinit var binding: FragmentSearchBinding
     private lateinit var thisContext:Context
-
+    private val mainActivityViewModel: MainActivityViewModel by activityViewModels {
+        MainActivityViewModelFactory(
+            (requireActivity().application as ProjectApplication).wallpaperRepository,
+            (requireActivity().application as ProjectApplication).categoryRepository
+        )
+    }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -34,56 +49,58 @@ class SearchFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         thisContext = requireContext()
-        binding.search.setOnClickListener { loadNextWallpapers(binding.searchEditText.text.toString(),currentPage)}
+        binding.search.setOnClickListener { getSearchData(binding.searchEditText.text.toString())}
         binding.backBtn.setOnClickListener { findNavController().popBackStack() }
     }
-    private var currentPage = 1
-    private var requestCount = 0
     private val wallpaperDataList = mutableListOf<WallpaperData>()
 
-    private fun getSearchData(query: String, size: Int) {
-        RetrofitClient.wallpaperApi.searchWallpapers(query, size).enqueue(object :
-            Callback<List<WallpaperData>> {
-            override fun onResponse(
-                call: Call<List<WallpaperData>>,
-                response: Response<List<WallpaperData>>
-            ) {
-                if (response.isSuccessful) {
-                    val result = response.body()
-                    if (result.isNullOrEmpty()) {
-                        // No wallpapers left to load
-                        return
-                    }
+    private fun getSearchData(query: String,) {
+        val totalPages = 80
 
-                    wallpaperDataList.addAll(result)
-                    updateAdapter()
+        val deferredResults = mutableListOf<Deferred<Response<List<WallpaperData>>>>()
 
-                    requestCount++ // Increment the request count
+        val scope = CoroutineScope(Dispatchers.IO)
 
-                    if (requestCount == 30) {
-                        requestCount = 0 // Reset the request count
-                        currentPage++ // Increment the current page
+        try {
+            for (page in 1..totalPages) {
+                val deferred = scope.async {
+                    RetrofitClient.wallpaperApi.searchWallpapers(query, page).execute()
+                }
+                deferredResults.add(deferred)
+            }
+
+            runBlocking {
+                val responses = deferredResults.awaitAll()
+
+                responses.forEachIndexed { index, response ->
+                    if (response.isSuccessful) {
+                        val result = response.body()
+                        if (!result.isNullOrEmpty()) {
+                            wallpaperDataList.addAll(result)
+                            lifecycleScope.launch {
+                                mainActivityViewModel.insertWallpapers(result)
+                            }
+                        }
+
+                        if (index == responses.lastIndex) {
+                            updateAdapter()
+                        }
+                    } else {
+                        // Handle API call failure
+                        Log.e("TAG", "onResponse: result ${response.code()}")
                     }
                 }
             }
-
-            override fun onFailure(call: Call<List<WallpaperData>>, t: Throwable) {
-                Log.e("TAG", "onResponse: result ${t.message}")
-            }
-        })
-    }
-
-    private fun updateAdapter() {
-        binding.searchList.apply{
-            adapter = SearchListAdapter(thisContext,wallpaperDataList)
-            layoutManager = GridLayoutManager(thisContext,3)
+        } catch (e: Exception) {
+            // Handle exceptions
+            Log.e("TAG", "Exception: ${e.message}")
         }
     }
 
-    // Call this function to load the next 30 wallpapers
-    private fun loadNextWallpapers(query: String,size: Int) {
-        if (requestCount == 0 && currentPage >= 1) {
-            getSearchData(query, size)
+    private fun updateAdapter() {
+        binding.searchList.apply {
+            adapter = SearchListAdapter(thisContext, wallpaperDataList)
+            layoutManager = GridLayoutManager(thisContext, 3)
         }
     }
 

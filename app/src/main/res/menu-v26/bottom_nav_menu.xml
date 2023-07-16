@@ -4,15 +4,19 @@
 
     <item android:id="@+id/home"
         android:icon="@drawable/icon_home"
+        android:iconTintMode="src_atop"
         android:title="@string/home"/>
     <item android:id="@+id/collections"
         android:icon="@drawable/outline_collections"
+        android:iconTintMode="src_atop"
         android:title="@string/collection"/>
     <item android:id="@+id/favourites"
         android:icon="@drawable/star_outline"
-        android:title="@string/favorite_s"/>
+        android:iconTintMode="src_in"
+        android:title="@string/favourite"/>
     <item android:id="@+id/account"
         android:icon="@drawable/user_outline"
+        android:iconTintMode="src_over"
         android:title="@string/profile"/>
 
 

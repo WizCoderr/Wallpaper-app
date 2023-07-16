@@ -2,6 +2,7 @@ package com.flaxstudio.wallpaperapp.fragments
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -30,9 +31,6 @@ private lateinit var thisContext : Context
             (requireActivity().application as ProjectApplication).categoryRepository
         )
     }
-    lateinit var receivedData:String
-
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -47,10 +45,9 @@ private lateinit var thisContext : Context
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.backBtn.setOnClickListener{findNavController().popBackStack()}
-        receivedData = requireArguments().getString("categoryId").toString()
-        binding.tvCollectionName.text = requireArguments().getString("categoryTittle").toString()
+        binding.tvCollectionName.text = requireArguments().getString("categoryName").toString()
         lifecycleScope.launch(Dispatchers.Main){
-            val datas = mainActivityViewModel.getWallpapersCategorised(receivedData).first()
+            val datas = mainActivityViewModel.getWallpapersCategorised(requireArguments().getString("categoryId").toString()).first()
             val adapters = CollectionRecyclerViewAdapter(thisContext,datas)
             binding.rvItem.apply {
                 adapter = adapters
@@ -59,7 +56,8 @@ private lateinit var thisContext : Context
                     val bundle = Bundle()
                     bundle.putString("categoryImg",datas[it].image_url)
                     bundle.putInt("collect",1)
-                    findNavController().navigate(R.id.action_hostFragment_to_downloadFragmen,bundle)
+                    Log.d("TAG", "onViewCreated: $bundle")
+                    findNavController().navigate(R.id.action_collectionFragment_to_downloadFragment,bundle)
                 }
             }
         }
