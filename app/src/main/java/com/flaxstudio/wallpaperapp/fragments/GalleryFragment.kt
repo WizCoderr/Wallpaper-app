@@ -12,7 +12,7 @@ import com.flaxstudio.wallpaperapp.R
 import com.flaxstudio.wallpaperapp.adapters.CollectionRecyclerViewAdapter
 import com.flaxstudio.wallpaperapp.databinding.FragmentGalleryBinding
 
-class GalleryFragment : Fragment() {
+class GalleryFragment() : Fragment() {
     private lateinit var binding : FragmentGalleryBinding
     private lateinit var thisContext : Context
 
@@ -20,7 +20,7 @@ class GalleryFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding =  FragmentGalleryBinding.inflate(layoutInflater , container ,false)
+        binding =  FragmentGalleryBinding.inflate(layoutInflater)
         thisContext = requireContext()
         return binding.root
     }

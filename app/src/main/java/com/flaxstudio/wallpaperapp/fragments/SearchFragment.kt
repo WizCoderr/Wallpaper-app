@@ -2,7 +2,6 @@ package com.flaxstudio.wallpaperapp.fragments
 
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -21,6 +20,7 @@ import retrofit2.Response
 class SearchFragment : Fragment() {
     private lateinit var binding: FragmentSearchBinding
     private lateinit var thisContext:Context
+    private val wallpaperDataList = mutableListOf<WallpaperData>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -34,43 +34,35 @@ class SearchFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         thisContext = requireContext()
-        binding.search.setOnClickListener { loadNextWallpapers(binding.searchEditText.text.toString(),currentPage)}
+        binding.search.setOnClickListener { getSearchData(binding.searchEditText.text.toString())}
         binding.backBtn.setOnClickListener { findNavController().popBackStack() }
     }
-    private var currentPage = 1
-    private var requestCount = 0
-    private val wallpaperDataList = mutableListOf<WallpaperData>()
+    private fun getSearchData(query: String) {
+        for (page in 1..80) {
+            RetrofitClient.wallpaperApi.searchWallpapers(query, page).enqueue(object : Callback<List<WallpaperData>> {
+                override fun onResponse(call: Call<List<WallpaperData>>, response: Response<List<WallpaperData>>) {
+                    if (response.isSuccessful) {
+                        val result = response.body()
+                        if (result.isNullOrEmpty()) {
+                            // No wallpapers found for this page
+                            return
+                        }
 
-    private fun getSearchData(query: String, size: Int) {
-        RetrofitClient.wallpaperApi.searchWallpapers(query, size).enqueue(object :
-            Callback<List<WallpaperData>> {
-            override fun onResponse(
-                call: Call<List<WallpaperData>>,
-                response: Response<List<WallpaperData>>
-            ) {
-                if (response.isSuccessful) {
-                    val result = response.body()
-                    if (result.isNullOrEmpty()) {
-                        // No wallpapers left to load
-                        return
-                    }
+                        wallpaperDataList.addAll(result)
 
-                    wallpaperDataList.addAll(result)
-                    updateAdapter()
-
-                    requestCount++ // Increment the request count
-
-                    if (requestCount == 30) {
-                        requestCount = 0 // Reset the request count
-                        currentPage++ // Increment the current page
+                        if (page == 80) {
+                            // All pages have been loaded
+                            // Perform any final actions or UI updates
+                            return
+                        }
                     }
                 }
-            }
 
-            override fun onFailure(call: Call<List<WallpaperData>>, t: Throwable) {
-                Log.e("TAG", "onResponse: result ${t.message}")
-            }
-        })
+                override fun onFailure(call: Call<List<WallpaperData>>, t: Throwable) {
+                    // Handle API call failure
+                }
+            })
+        }
     }
 
     private fun updateAdapter() {
@@ -79,13 +71,4 @@ class SearchFragment : Fragment() {
             layoutManager = GridLayoutManager(thisContext,3)
         }
     }
-
-    // Call this function to load the next 30 wallpapers
-    private fun loadNextWallpapers(query: String,size: Int) {
-        if (requestCount == 0 && currentPage >= 1) {
-            getSearchData(query, size)
-        }
-    }
-
-
 }
