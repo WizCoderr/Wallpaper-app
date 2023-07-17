@@ -19,10 +19,14 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.WallpaperApp"
         tools:targetApi="31">
+        <activity
+            android:name=".SplashActivity"
+            android:exported="false" />
 
         <meta-data
             android:name="com.razorpay.ApiKey"
             android:value="rzp_test_gDktk0DfOwUVds" />
+
         <activity
             android:name=".SubscriptionActivity"
             android:exported="false" />
@@ -37,7 +41,7 @@
         </activity>
         <activity
             android:name=".MainActivity"
-            android:exported="false"></activity>
+            android:exported="false" />
 
         <receiver
             android:name=".utils.DownloadFinishReceiver"
