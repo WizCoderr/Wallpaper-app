@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import com.flaxstudio.wallpaperapp.R
 import com.flaxstudio.wallpaperapp.databinding.FragmentHostBinding
 
+@Suppress("DEPRECATION")
 class HostFragment :Fragment() {
     private lateinit var hostBinding: FragmentHostBinding
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
@@ -30,7 +31,7 @@ class HostFragment :Fragment() {
                     true
                 }
                 R.id.favourites -> {
-                      navigateToFragment(CollectionFragment())
+                      navigateToFragment(FavoritesFragment())
                     true
                 }
                 R.id.account ->{
