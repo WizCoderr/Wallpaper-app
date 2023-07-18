@@ -12,6 +12,9 @@
     <string name="About_us">About Us</string>
     <string name="setWallpaper">Set As Wallpaper</string>
     <string name="setAsWallpaper">What would you like to do</string>
+    <string name="developed_by">Developed by team Flax Studio</string>
+    <string name="tagline"># beautify your device\'s walls</string>
+
 
     <!-- Text For Subscription Fragment -->
 
@@ -45,6 +48,7 @@
     <string name="collection">Collection</string>
     <string name="favourite">Favourite</string>
     <string name="profile">Profile</string>
+
 
 
 </resources>
