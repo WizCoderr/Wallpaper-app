@@ -24,8 +24,13 @@ import com.flaxstudio.wallpaperapp.R
 import com.flaxstudio.wallpaperapp.adapters.WallpaperAdapter
 import com.flaxstudio.wallpaperapp.databinding.FragmentDownloadBinding
 import com.flaxstudio.wallpaperapp.utils.DownloadItems
+import com.flaxstudio.wallpaperapp.utils.LikedWallpaperDao
 import com.flaxstudio.wallpaperapp.utils.setWallpaperForHomeScreen
 import com.flaxstudio.wallpaperapp.utils.setWallpaperForLockScreen
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 
 
 class DownloadFragment : Fragment() {
@@ -33,17 +38,21 @@ class DownloadFragment : Fragment() {
     private lateinit var bitmap: Bitmap
     private lateinit var thisContext: Context
     private lateinit var data:String
+    private lateinit var auth : FirebaseAuth
+    private lateinit var currUser : FirebaseUser
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
         binding = FragmentDownloadBinding.inflate(inflater, container, false)
+        auth = Firebase.auth
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         thisContext = requireContext()
+        currUser = auth.currentUser!!
         when(requireArguments().getInt("collect")){
             0-> data = requireArguments().getString("image").toString()
             1-> data = requireArguments().getString("categoryImg").toString()
@@ -55,7 +64,19 @@ class DownloadFragment : Fragment() {
             bitmap = binding.wallpaper.drawable.toBitmap()
             setAsWallpaper(bitmap)
         }
+        binding.btnLike.setOnClickListener {
+            //Dummy data
+            var uid : String = currUser.uid
+            var imageUrl : String = "dfsdfsdfsf"
+            var blurHash : String = "sdsdfsdf"
+            wallpaperLiked(uid , imageUrl , blurHash)
+        }
 
+    }
+
+    private fun wallpaperLiked( uid : String , imageUrl :String , blurHash : String) {
+        val wallpaperDao  = LikedWallpaperDao()
+        wallpaperDao.addWallpaper(uid , imageUrl , blurHash)
     }
 
     private fun setAsWallpaper(bitmap: Bitmap) {
@@ -97,6 +118,13 @@ class DownloadFragment : Fragment() {
            }
        }
     }
+
+
+
+
+
+
+
 
     private fun downloadImage(context: Context, url: String): Long {
         // val downloadManager = context.getSystemService(DownloadManager::class.java)!!
