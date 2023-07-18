@@ -81,6 +81,8 @@
         implementation 'com.google.firebase:firebase-auth-ktx'
         implementation 'com.google.android.gms:play-services-auth:20.6.0'
         implementation 'com.google.firebase:firebase-firestore-ktx:24.6.1'
+        implementation 'com.google.firebase:firebase-messaging:23.1.2'
+
 
 
         // Payment integration

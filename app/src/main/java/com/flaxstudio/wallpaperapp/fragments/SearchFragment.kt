@@ -54,7 +54,7 @@ class SearchFragment : Fragment() {
     }
     private val wallpaperDataList = mutableListOf<WallpaperData>()
 
-    private fun getSearchData(query: String,) {
+    private fun getSearchData(query: String) {
         val totalPages = 80
 
         val deferredResults = mutableListOf<Deferred<Response<List<WallpaperData>>>>()

@@ -58,12 +58,12 @@ class SubscriptionActivity : AppCompatActivity() , PaymentResultListener {
             options.put("description","Demoing Charges")
             //You can omit the image option to fetch the image from the dashboard
             options.put("image","https://s3.amazonaws.com/rzp-mobile/images/rzp.jpg")
-            options.put("theme.color", "#3399cc");
-            options.put("currency","INR");
-            options.put("order_id", "order_DBJOWzybf0sJbb");
+            options.put("theme.color", "#3399cc")
+            options.put("currency","INR")
+            options.put("order_id", "order_DBJOWzybf0sJbb")
             options.put("amount","50000")//pass amount in currency subunits
 
-            val retryObj =  JSONObject();
+            val retryObj =  JSONObject()
             retryObj.put("enabled", true);
             retryObj.put("max_count", 4);
             options.put("retry", retryObj);
