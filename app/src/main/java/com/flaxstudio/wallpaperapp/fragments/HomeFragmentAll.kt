@@ -46,7 +46,7 @@ class HomeFragmentAll : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         contextThis = requireContext()
         lifecycleScope.launch(Dispatchers.Main){
-            val datas = mainActivityViewModel.getAllCategories().collect{
+            mainActivityViewModel.getAllCategories().collect{
                 allData = it
                 updateRecylerView()
             }
