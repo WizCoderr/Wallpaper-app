@@ -18,19 +18,25 @@ import androidx.appcompat.app.AlertDialog
 import androidx.core.graphics.drawable.toBitmap
 import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
+import com.flaxstudio.wallpaperapp.ProjectApplication
 import com.flaxstudio.wallpaperapp.R
 import com.flaxstudio.wallpaperapp.adapters.WallpaperAdapter
 import com.flaxstudio.wallpaperapp.databinding.FragmentDownloadBinding
+import com.flaxstudio.wallpaperapp.source.database.LikedWallpaper
 import com.flaxstudio.wallpaperapp.utils.DownloadItems
-import com.flaxstudio.wallpaperapp.utils.LikedWallpaperDao
 import com.flaxstudio.wallpaperapp.utils.setWallpaperForHomeScreen
 import com.flaxstudio.wallpaperapp.utils.setWallpaperForLockScreen
+import com.flaxstudio.wallpaperapp.viewmodel.MainActivityViewModel
+import com.flaxstudio.wallpaperapp.viewmodel.MainActivityViewModelFactory
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
+import kotlinx.coroutines.launch
 
 
 class DownloadFragment : Fragment() {
@@ -40,6 +46,16 @@ class DownloadFragment : Fragment() {
     private lateinit var data:String
     private lateinit var auth : FirebaseAuth
     private lateinit var currUser : FirebaseUser
+
+
+
+    private val mainActivityViewModel: MainActivityViewModel by activityViewModels {
+        MainActivityViewModelFactory(
+            (requireActivity().application as ProjectApplication).wallpaperRepository,
+            (requireActivity().application as ProjectApplication).categoryRepository,
+            (requireActivity().application as ProjectApplication).likedWallpaperRepository
+        )
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
@@ -58,6 +74,7 @@ class DownloadFragment : Fragment() {
             1-> data = requireArguments().getString("categoryImg").toString()
         }
         Log.i("TAG", "onViewCreated: $data")
+        
         Glide.with(thisContext).load(data).into(binding.wallpaper)
         binding.backBtn.setOnClickListener { findNavController().popBackStack() }
         binding.setWallpaper.setOnClickListener {
@@ -75,8 +92,13 @@ class DownloadFragment : Fragment() {
     }
 
     private fun wallpaperLiked( uid : String , imageUrl :String , blurHash : String) {
-        val wallpaperDao  = LikedWallpaperDao()
-        wallpaperDao.addWallpaper(uid , imageUrl , blurHash)
+
+        Toast.makeText(requireContext() , "Wallpaper Liked" , Toast.LENGTH_SHORT).show()
+        val likedWallpaper = LikedWallpaper(166, "xyz" , "sfdfd", false , System.currentTimeMillis() , "VnMqg0n0aFMCvHvW7UR9mMMtios2")
+        lifecycleScope.launch {
+           mainActivityViewModel.insertLikedWallpaper(likedWallpaper)
+        }
+
     }
 
     private fun setAsWallpaper(bitmap: Bitmap) {

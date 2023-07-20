@@ -6,6 +6,8 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import com.flaxstudio.wallpaperapp.source.api.RetrofitClient
 import com.flaxstudio.wallpaperapp.source.database.CategoryRepo
+import com.flaxstudio.wallpaperapp.source.database.LikedWallpaper
+import com.flaxstudio.wallpaperapp.source.database.LikedWallpaperRepo
 import com.flaxstudio.wallpaperapp.source.database.WallpaperCategoryData
 import com.flaxstudio.wallpaperapp.source.database.WallpaperData
 import com.flaxstudio.wallpaperapp.source.database.WallpaperRepo
@@ -20,7 +22,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class MainActivityViewModel(private val wallpaperRepo: WallpaperRepo,private val categoryRepo: CategoryRepo):ViewModel() {
+class MainActivityViewModel(private val wallpaperRepo: WallpaperRepo,private val categoryRepo: CategoryRepo , private val likedWallpaperRepo: LikedWallpaperRepo):ViewModel() {
 
      fun insertWallpapers(wallpaperData: List<WallpaperData>){
       wallpaperRepo.insertWallpaper(wallpaperData)
@@ -99,14 +101,29 @@ class MainActivityViewModel(private val wallpaperRepo: WallpaperRepo,private val
          }
          return wallpaperRepo.getWallpapersCategorised(categoryId)
      }
+
+    // Liked Wallpaper Operations
+    fun insertLikedWallpaper(likedWallpaper: LikedWallpaper) {
+        likedWallpaperRepo.addWallpaper(likedWallpaper)
+    }
+    fun deleteLikedWallpaper(likedWallpaper: LikedWallpaper){
+        likedWallpaperRepo.deleteWallpaper(likedWallpaper)
+    }
+    fun getAllLikedWallpaper() : Flow<List<LikedWallpaper>>{
+       return likedWallpaperRepo.getAllLikedWallpaper()
+    }
+    fun addAllLikedWallpaper(likedWallpaper : List<LikedWallpaper>){
+        likedWallpaperRepo.addAllLikedWallpaper(likedWallpaper)
+    }
+
 }
 
 // this will allow us to pass parameter to view model
-class MainActivityViewModelFactory(private val wallpaperRepo: WallpaperRepo, private val categoryRepo: CategoryRepo) : ViewModelProvider.Factory {
+class MainActivityViewModelFactory(private val wallpaperRepo: WallpaperRepo, private val categoryRepo: CategoryRepo , private val likedWallpaperRepo: LikedWallpaperRepo) : ViewModelProvider.Factory {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(MainActivityViewModel::class.java)) {
             @Suppress("UNCHECKED_CAST")
-            return MainActivityViewModel(wallpaperRepo, categoryRepo) as T
+            return MainActivityViewModel(wallpaperRepo, categoryRepo , likedWallpaperRepo) as T
         }
         throw IllegalArgumentException("Unknown ViewModel class")
     }

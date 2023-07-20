@@ -10,6 +10,7 @@ import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.lifecycle.lifecycleScope
 import com.flaxstudio.wallpaperapp.databinding.ActivitySignInBinding
+import com.flaxstudio.wallpaperapp.utils.FirebaseLikedWallpaperDao
 import com.flaxstudio.wallpaperapp.utils.UserDao
 import com.flaxstudio.wallpaperapp.utils.Users
 import com.google.android.gms.auth.api.signin.GoogleSignIn
@@ -88,10 +89,10 @@ class SignInActivity : AppCompatActivity() {
 
     override fun onStart() {
         super.onStart()
-//        val currUser = auth.currentUser
-//        updateUI(currUser)
-        val intent = Intent(this, MainActivity::class.java)
-        startActivity(intent)
+        val currUser = auth.currentUser
+        updateUI(currUser)
+//        val intent = Intent(this, MainActivity::class.java)
+//        startActivity(intent)
     }
     private fun firebaseAuthWithGoogle(idToken: String?) {
 
@@ -119,6 +120,7 @@ class SignInActivity : AppCompatActivity() {
                                 val userDao = UserDao()
                                 userDao.addUser(users)
                             }
+                            getAllLikedWallpaper(user!!.uid)
                             updateUI(user)
                         } else {
                             // If sign in fails, display a message to the user.
@@ -133,6 +135,13 @@ class SignInActivity : AppCompatActivity() {
                 Log.d(TAG, "No ID token!")
             }
         }
+    }
+
+    private fun getAllLikedWallpaper(uid: String) {
+
+       val dao = FirebaseLikedWallpaperDao()
+        dao.getAllWallpaper(uid)
+
     }
 
     private fun updateUI(firebaseUser: FirebaseUser?) {
