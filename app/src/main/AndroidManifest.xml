@@ -9,8 +9,9 @@
     <uses-permission android:name="android.permission.SET_WALLPAPER" />
 
     <application
-        android:name=".ProjectApplication"
+        android:name="com.flaxstudio.wallpaper.ProjectApplication"
         android:allowBackup="true"
+        android:enableOnBackInvokedCallback="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/ic_launcher"
@@ -18,9 +19,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.WallpaperApp"
-        tools:targetApi="31">
+        tools:targetApi="tiramisu">
         <activity
-            android:name=".SplashActivity"
+            android:name="com.flaxstudio.wallpaper.SplashActivity"
             android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -34,19 +35,19 @@
             android:value="rzp_test_gDktk0DfOwUVds" />
 
         <activity
-            android:name=".SubscriptionActivity"
+            android:name="com.flaxstudio.wallpaper.SubscriptionActivity"
             android:exported="false" />
         <activity
-            android:name=".SignInActivity"
+            android:name="com.flaxstudio.wallpaper.SignInActivity"
             android:exported="false">
 
         </activity>
         <activity
-            android:name=".MainActivity"
+            android:name="com.flaxstudio.wallpaper.MainActivity"
             android:exported="false" />
 
         <receiver
-            android:name=".utils.DownloadFinishReceiver"
+            android:name="com.flaxstudio.wallpaper.utils.DownloadFinishReceiver"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.DOWNLOAD_COMPLETE" />

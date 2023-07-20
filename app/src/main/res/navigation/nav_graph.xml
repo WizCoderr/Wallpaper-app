@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/downloadFragment"
-        android:name="com.flaxstudio.wallpaperapp.fragments.DownloadFragment"
+        android:name="com.flaxstudio.wallpaper.fragments.DownloadFragment"
         android:label="fragment_download"
         tools:layout="@layout/fragment_download">
         <argument
@@ -16,7 +16,7 @@
     </fragment>
     <fragment
         android:id="@+id/searchFragment"
-        android:name="com.flaxstudio.wallpaperapp.fragments.SearchFragment"
+        android:name="com.flaxstudio.wallpaper.fragments.SearchFragment"
         android:label="fragment_search"
         tools:layout="@layout/fragment_search" >
         <action
@@ -26,28 +26,34 @@
     </fragment>
     <fragment
         android:id="@+id/hostFragment"
-        android:name="com.flaxstudio.wallpaperapp.fragments.HostFragment"
+        android:name="com.flaxstudio.wallpaper.fragments.HostFragment"
         android:label="fragment_host"
         tools:layout="@layout/fragment_host" >
         <action
             android:id="@+id/action_hostFragment_to_searchFragment"
-            app:destination="@id/searchFragment" />
-        <action
-            android:id="@+id/action_hostFragment_to_downloadFragmen"
-            app:destination="@id/downloadFragment"
-            app:popUpTo="@id/hostFragment" />
+            app:destination="@id/searchFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
         <action
             android:id="@+id/action_hostFragment_to_collectionFragment"
             app:destination="@id/collectionFragment"
             app:enterAnim="@anim/nav_default_enter_anim"
             app:exitAnim="@anim/nav_default_exit_anim"
             app:popEnterAnim="@anim/nav_default_pop_enter_anim"
-            app:popExitAnim="@anim/nav_default_pop_exit_anim"
-            app:popUpTo="@id/hostFragment" />
+            app:popExitAnim="@anim/nav_default_pop_exit_anim"/>
+        <action
+            android:id="@+id/action_hostFragment_to_downloadFragment"
+            app:destination="@id/downloadFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
     </fragment>
     <fragment
         android:id="@+id/collectionFragment"
-        android:name="com.flaxstudio.wallpaperapp.fragments.CollectionFragment"
+        android:name="com.flaxstudio.wallpaper.fragments.CollectionFragment"
         android:label="fragment_collection"
         tools:layout="@layout/fragment_collection" >
         <action
@@ -56,7 +62,6 @@
             app:enterAnim="@anim/nav_default_enter_anim"
             app:exitAnim="@anim/nav_default_exit_anim"
             app:popEnterAnim="@anim/nav_default_pop_enter_anim"
-            app:popExitAnim="@anim/nav_default_pop_exit_anim"
-            app:popUpTo="@id/collectionFragment" />
+            app:popExitAnim="@anim/nav_default_pop_exit_anim"/>
     </fragment>
 </navigation>
