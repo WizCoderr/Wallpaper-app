@@ -30,9 +30,7 @@ class SearchListAdapter(private val context: Context,private val searchData:List
         }
     }
 
-        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SearchView = SearchView(
-            LayoutInflater.from(context).inflate(R.layout.collection_item, parent, false)
-        )
+        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SearchView = SearchView(LayoutInflater.from(context).inflate(R.layout.collection_item, parent, false))
 
         override fun getItemCount(): Int = searchData.size
 

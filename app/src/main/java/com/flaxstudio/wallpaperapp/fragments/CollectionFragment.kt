@@ -51,7 +51,7 @@ private lateinit var thisContext : Context
             val adapters = CollectionRecyclerViewAdapter(thisContext,datas)
             binding.rvItem.apply {
                 adapter = adapters
-                layoutManager = GridLayoutManager(thisContext, 2)
+                layoutManager = GridLayoutManager(thisContext, 3)
                 adapters.setOnClickListener {
                     val bundle = Bundle()
                     bundle.putString("categoryImg",datas[it].image_url)

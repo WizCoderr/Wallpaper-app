@@ -3,12 +3,14 @@ package com.flaxstudio.wallpaperapp
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
 import android.view.WindowInsets
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.flaxstudio.wallpaperapp.databinding.ActivitySplashBinding
+import com.flaxstudio.wallpaperapp.viewmodel.MainActivityViewModel
+import com.flaxstudio.wallpaperapp.viewmodel.MainActivityViewModelFactory
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
@@ -21,6 +23,12 @@ class SplashActivity : AppCompatActivity() {
 
     private lateinit var binding : ActivitySplashBinding
     private lateinit var auth : FirebaseAuth
+    private val mainActivityViewModel: MainActivityViewModel by viewModels {
+        MainActivityViewModelFactory(
+            (application as ProjectApplication).wallpaperRepository,
+            (application as ProjectApplication).categoryRepository
+        )
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,7 +57,8 @@ class SplashActivity : AppCompatActivity() {
         val currUser = auth.currentUser
 
         lifecycleScope.launch(Dispatchers.Default){
-            delay(3000)
+            mainActivityViewModel.fetchCategories()
+            delay(5000)
             withContext(Dispatchers.Main){
                 if(currUser == null){
                     val intent = Intent(this@SplashActivity, SignInActivity::class.java)

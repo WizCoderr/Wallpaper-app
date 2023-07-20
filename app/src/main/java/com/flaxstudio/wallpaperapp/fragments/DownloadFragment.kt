@@ -45,13 +45,13 @@ class DownloadFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
         binding = FragmentDownloadBinding.inflate(inflater, container, false)
-        auth = Firebase.auth
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         thisContext = requireContext()
+        auth = Firebase.auth
         currUser = auth.currentUser!!
         when(requireArguments().getInt("collect")){
             0-> data = requireArguments().getString("image").toString()

@@ -14,18 +14,19 @@ import com.flaxstudio.wallpaperapp.ProjectApplication
 import com.flaxstudio.wallpaperapp.R
 import com.flaxstudio.wallpaperapp.adapters.HomeRecyclerViewAdapter
 import com.flaxstudio.wallpaperapp.databinding.FragmentHomeAllBinding
+import com.flaxstudio.wallpaperapp.source.database.WallpaperCategoryData
 import com.flaxstudio.wallpaperapp.viewmodel.MainActivityViewModel
 import com.flaxstudio.wallpaperapp.viewmodel.MainActivityViewModelFactory
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 
 
 class HomeFragmentAll : Fragment() {
 
 
-private lateinit var binding: FragmentHomeAllBinding
-private lateinit var contextThis : Context
+    private lateinit var binding: FragmentHomeAllBinding
+    private lateinit var contextThis : Context
+    private var allData:List<WallpaperCategoryData> = ArrayList()
     private val mainActivityViewModel: MainActivityViewModel by activityViewModels {
         MainActivityViewModelFactory(
             (requireActivity().application as ProjectApplication).wallpaperRepository,
@@ -45,17 +46,25 @@ private lateinit var contextThis : Context
         super.onViewCreated(view, savedInstanceState)
         contextThis = requireContext()
         lifecycleScope.launch(Dispatchers.Main){
-            val datas = mainActivityViewModel.getAllCategories().first()
-            val adapters = HomeRecyclerViewAdapter(contextThis,datas)
-            binding.recyclerview.apply {
-                adapter = adapters
-                layoutManager = GridLayoutManager(contextThis, 2)
-                adapters.setOnClickListener {
-                    val bundle = Bundle()
-                    bundle.putString("categoryId",datas[it]._id)
-                    bundle.putString("categoryName",datas[it].title)
-                    findNavController().navigate(R.id.action_hostFragment_to_collectionFragment,bundle)
+            val datas = mainActivityViewModel.getAllCategories().collect{
+                allData = it
+                updateRecylerView()
+            }
+
+        }
+    }
+
+    private fun updateRecylerView() {
+        val adapters = HomeRecyclerViewAdapter(contextThis,allData)
+        binding.recyclerview.apply {
+            adapter = adapters
+            layoutManager = GridLayoutManager(contextThis, 2)
+            adapters.setOnClickListener {
+                val bundle = Bundle().apply {
+                    putString("categoryId",allData[it]._id)
+                    putString("categoryName",allData[it].title)
                 }
+                findNavController().navigate(R.id.action_hostFragment_to_collectionFragment,bundle)
             }
         }
     }
