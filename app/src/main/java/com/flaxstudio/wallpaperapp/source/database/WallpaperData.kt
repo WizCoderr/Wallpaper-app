@@ -34,6 +34,7 @@ data class WallpaperData(
     val is_premium: Boolean
 )
 
+
 @Dao
 interface WallpaperDao{
     @Query("SELECT * FROM WALLPAPERS")

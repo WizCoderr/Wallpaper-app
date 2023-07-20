@@ -5,11 +5,13 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 
-@Database(entities = [WallpaperCategoryData::class, WallpaperData::class], version = 1)
+@Database(entities = [WallpaperCategoryData::class, WallpaperData::class , LikedWallpaper::class], version = 1)
 abstract class WallpaperDatabase : RoomDatabase() {
 
     abstract fun wallpaperDao(): WallpaperDao
     abstract fun categoryDao(): CategoryDao
+
+    abstract fun likedWallpaperDao() : LikedWallpaperDao
     companion object {
         // Singleton instance of the database
         @Volatile
