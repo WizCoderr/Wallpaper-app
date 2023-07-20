@@ -7,17 +7,17 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:797056517970:android:3444e81b0da22d7ff05c8b",
+        "mobilesdk_app_id": "1:797056517970:android:245810035d711dc1f05c8b",
         "android_client_info": {
-          "package_name": "com.flaxstudio.wallpaperapp"
+          "package_name": "com.flaxstudio.wallpaper"
         }
       },
       "oauth_client": [
         {
-          "client_id": "797056517970-pjja20i4lsduet0gmch1josp8n3rsg36.apps.googleusercontent.com",
+          "client_id": "797056517970-7kpusdap0h6hlvu9g1nmc8dqp77i17rv.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.flaxstudio.wallpaperapp",
+            "package_name": "com.flaxstudio.wallpaper",
             "certificate_hash": "73121984c1d2294631ccaa209e4c34fa95efad0e"
           }
         },
