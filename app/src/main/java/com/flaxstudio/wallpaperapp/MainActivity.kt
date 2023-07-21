@@ -7,6 +7,7 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import com.flaxstudio.wallpaperapp.databinding.ActivityMainBinding
 import com.flaxstudio.wallpaperapp.source.database.LikedWallpaper
 import com.flaxstudio.wallpaperapp.utils.FirebaseLikedWallpaperDao
@@ -14,6 +15,7 @@ import com.flaxstudio.wallpaperapp.viewmodel.MainActivityViewModel
 import com.flaxstudio.wallpaperapp.viewmodel.MainActivityViewModelFactory
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
@@ -31,15 +33,17 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        val dao = FirebaseLikedWallpaperDao()
 
+        lifecycleScope.launch {
+            mainActivityViewModel.getAllLikedWallpaper().collect{
+                for (wallpaper in it){
+                    dao.addWallpaper(wallpaper )
+                }
+                //mainActivityViewModel.clearTable()
 
-        val allLikedWallpapers  = mainActivityViewModel.getAllLikedWallpaper() as List<LikedWallpaper>
-        Log.i("TAG" , "all wallpaper : $allLikedWallpapers")
+                Log.i("TAG" , "all wallpaper in main Activity : $it")
 
-        if (allLikedWallpapers != null ){
-            val dao = FirebaseLikedWallpaperDao()
-            for (wallpaper in allLikedWallpapers){
-                dao.addWallpaper(wallpaper)
             }
         }
 

@@ -74,7 +74,7 @@ class DownloadFragment : Fragment() {
             1-> data = requireArguments().getString("categoryImg").toString()
         }
         Log.i("TAG", "onViewCreated: $data")
-        
+
         Glide.with(thisContext).load(data).into(binding.wallpaper)
         binding.backBtn.setOnClickListener { findNavController().popBackStack() }
         binding.setWallpaper.setOnClickListener {
@@ -94,9 +94,14 @@ class DownloadFragment : Fragment() {
     private fun wallpaperLiked( uid : String , imageUrl :String , blurHash : String) {
 
         Toast.makeText(requireContext() , "Wallpaper Liked" , Toast.LENGTH_SHORT).show()
-        val likedWallpaper = LikedWallpaper(166, "xyz" , "sfdfd", false , System.currentTimeMillis() , "VnMqg0n0aFMCvHvW7UR9mMMtios2")
+        val likedWallpaper = LikedWallpaper(167, "xyz" , "sfdfd", false , System.currentTimeMillis() , "VnMqg0n0aFMCvHvW7UR9mMMtios2")
+        val likedWallpaper2 = LikedWallpaper(168, "xyz" , "sfdfd", false , System.currentTimeMillis() , "VnMqg0n0aFMCvHvW7UR9mMMtios2")
+        val likedWallpaper3 = LikedWallpaper(169, "xyz" , "sfdfd", false , System.currentTimeMillis() , "VnMqg0n0aFMCvHvW7UR9mMMtios2")
         lifecycleScope.launch {
            mainActivityViewModel.insertLikedWallpaper(likedWallpaper)
+           mainActivityViewModel.insertLikedWallpaper(likedWallpaper2)
+           mainActivityViewModel.insertLikedWallpaper(likedWallpaper3)
+            Log.i("TAG" , "inside download fr.. wallpaperLiked : $likedWallpaper")
         }
 
     }
@@ -140,12 +145,6 @@ class DownloadFragment : Fragment() {
            }
        }
     }
-
-
-
-
-
-
 
 
     private fun downloadImage(context: Context, url: String): Long {
