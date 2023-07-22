@@ -50,7 +50,7 @@ private var data:List<WallpaperData> = ArrayList()
         binding.backBtn.setOnClickListener{findNavController().popBackStack()}
         binding.tvCollectionName.text = requireArguments().getString("categoryName").toString()
         lifecycleScope.launch(Dispatchers.Main){
-            mainActivityViewModel.getWallpapersCategorised(requireArguments().getString("categoryId").toString(),pgNumb).collect{
+            mainActivityViewModel.getWallpapersCategorised(requireArguments().getString("categoryId").toString()).collect{
                 data = it
                 updateRV()
             }

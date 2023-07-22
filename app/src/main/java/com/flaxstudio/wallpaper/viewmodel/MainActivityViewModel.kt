@@ -11,8 +11,14 @@ import com.flaxstudio.wallpaper.source.database.LikedWallpaperRepo
 import com.flaxstudio.wallpaper.source.database.WallpaperCategoryData
 import com.flaxstudio.wallpaper.source.database.WallpaperData
 import com.flaxstudio.wallpaper.source.database.WallpaperRepo
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Deferred
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.async
+import kotlinx.coroutines.awaitAll
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -45,31 +51,51 @@ class MainActivityViewModel(private val wallpaperRepo: WallpaperRepo,private val
     suspend fun getAllCategories():Flow<List<WallpaperCategoryData>> {
         return categoryRepo.getAllCategory()
     }
-    private fun getWallpapers(categoryId: String,page:Int) {
-        RetrofitClient.wallpaperApi.getWallpapersPerWallpaper(categoryId,page).enqueue(object :
-            Callback<List<WallpaperData>> {
-            override fun onFailure(call: Call<List<WallpaperData>>, t: Throwable) {
-                TODO("Not yet implemented")
+    private fun getWallpapers(categoryId: String) {
+        val totalPages = 80
+
+        val deferredResults = mutableListOf<Deferred<Response<List<WallpaperData>>>>()
+
+        val scope = CoroutineScope(Dispatchers.IO)
+
+        try {
+            for (page in 1..totalPages) {
+                val deferred = scope.async {
+                    RetrofitClient.wallpaperApi.getWallpapersPerWallpaper(categoryId, page).execute()
+                }
+                deferredResults.add(deferred)
             }
 
-            override fun onResponse(
-                call: Call<List<WallpaperData>>,
-                response: Response<List<WallpaperData>>
-            ) {
-                if (response.isSuccessful){
-                    viewModelScope.launch {
-                        wallpaperRepo.insertWallpaper(response.body()!!)
+            runBlocking {
+                val responses = deferredResults.awaitAll()
+
+                responses.forEachIndexed { index, response ->
+                    if (response.isSuccessful) {
+                        val result = response.body()
+                        if (!result.isNullOrEmpty()) {
+                            wallpaperRepo.insertWallpaper(result)
+                        }
+
+                        if (index == responses.lastIndex) {
+
+                        }
+                    } else {
+                        // Handle API call failure
+                        Log.e("TAG", "onResponse: result ${response.code()}")
                     }
                 }
             }
-        })
+        } catch (e: Exception) {
+            // Handle exceptions
+            Log.e("TAG", "Exception: ${e.message}")
+        }
     }
 
 
      suspend fun getAllWallpapers():Flow<List<WallpaperData>> = wallpaperRepo.getAllWallpaper()
-     suspend fun getWallpapersCategorised(categoryId:String,page: Int):Flow<List<WallpaperData>> {
+     suspend fun getWallpapersCategorised(categoryId:String):Flow<List<WallpaperData>> {
          viewModelScope.launch {
-             getWallpapers(categoryId,page)
+             getWallpapers(categoryId)
          }
          return wallpaperRepo.getWallpapersCategorised(categoryId)
      }
