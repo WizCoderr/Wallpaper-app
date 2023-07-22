@@ -87,6 +87,9 @@ class MainActivityViewModel(private val wallpaperRepo: WallpaperRepo,private val
     fun addAllLikedWallpaper(likedWallpaper : List<LikedWallpaper>){
         likedWallpaperRepo.addAllLikedWallpaper(likedWallpaper)
     }
+    fun clearTable(){
+        likedWallpaperRepo.clearTable()
+    }
 
 }
 

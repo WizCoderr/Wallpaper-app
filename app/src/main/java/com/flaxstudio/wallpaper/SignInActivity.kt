@@ -1,17 +1,22 @@
-package com.flaxstudio.wallpaper
+package com.flaxstudio.wallpaperapp
 
 import android.content.Intent
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.LayoutInflater
+import android.view.View
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.appcompat.app.AppCompatActivity
+import androidx.activity.viewModels
 import androidx.lifecycle.lifecycleScope
-import com.flaxstudio.wallpaper.utils.FirebaseLikedWallpaperDao
-import com.flaxstudio.wallpaper.utils.UserDao
-import com.flaxstudio.wallpaper.utils.Users
-import com.flaxstudio.wallpaperapp.R
 import com.flaxstudio.wallpaperapp.databinding.ActivitySignInBinding
+import com.flaxstudio.wallpaperapp.source.database.LikedWallpaper
+import com.flaxstudio.wallpaperapp.utils.FirebaseLikedWallpaperDao
+import com.flaxstudio.wallpaperapp.utils.UserDao
+import com.flaxstudio.wallpaperapp.utils.Users
+import com.flaxstudio.wallpaperapp.viewmodel.MainActivityViewModel
+import com.flaxstudio.wallpaperapp.viewmodel.MainActivityViewModelFactory
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
@@ -22,7 +27,10 @@ import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.tasks.await
+import kotlinx.coroutines.withContext
 
 private const val TAG = "SignInActivity"
 class SignInActivity : AppCompatActivity() {
@@ -32,6 +40,14 @@ class SignInActivity : AppCompatActivity() {
     private lateinit var googleSignInLauncher: ActivityResultLauncher<Intent>
     private lateinit var binding: ActivitySignInBinding
 
+
+    private val mainActivityViewModel: MainActivityViewModel by viewModels {
+        MainActivityViewModelFactory(
+            (application as ProjectApplication).wallpaperRepository,
+            (application as ProjectApplication).categoryRepository,
+            (application as ProjectApplication).likedWallpaperRepository
+        )
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivitySignInBinding.inflate(layoutInflater)
@@ -85,10 +101,10 @@ class SignInActivity : AppCompatActivity() {
 
     override fun onStart() {
         super.onStart()
-//        val currUser = auth.currentUser
-//        updateUI(currUser)
-        val intent = Intent(this, MainActivity::class.java)
-        startActivity(intent)
+        val currUser = auth.currentUser
+        updateUI(currUser)
+//        val intent = Intent(this, MainActivity::class.java)
+//        startActivity(intent)
     }
     private fun firebaseAuthWithGoogle(idToken: String?) {
 
@@ -136,7 +152,10 @@ class SignInActivity : AppCompatActivity() {
     private fun getAllLikedWallpaper(uid: String) {
 
        val dao = FirebaseLikedWallpaperDao()
-        dao.getAllWallpaper(uid)
+       val allLikedWallpaper : List<LikedWallpaper> =  dao.getAllWallpaper(uid)
+
+        mainActivityViewModel.clearTable()
+        mainActivityViewModel.addAllLikedWallpaper(allLikedWallpaper)
 
     }
 
