@@ -25,6 +25,9 @@ interface WallpaperApi {
         @Path("search_query") searchQuery: String,
         @Path("page_no") pageNo: Int
     ):Call<List<WallpaperData>>
+
+    @GET("/public/wallpaper/{wallpaper_id}")
+    fun getWallpaperById(@Path("wallpaper_id") wallpaperId: String?): Call<WallpaperData?>
 }
 
 object RetrofitClient {
