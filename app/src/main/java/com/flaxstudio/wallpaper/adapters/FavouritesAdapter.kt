@@ -6,10 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.flaxstudio.wallpaper.source.database.LikedWallpaper
 import com.flaxstudio.wallpaperapp.R
-import com.flaxstudio.wallpaperapp.source.database.LikedWallpaper
-import com.flaxstudio.wallpaperapp.source.database.WallpaperData
-
 class FavouritesAdapter(private val context : Context, private val data:List<LikedWallpaper>) : RecyclerView.Adapter<FavouritesAdapter.ViewHolder>() {
     private var itemClickListener:((position:Int )->Unit)? = null
 

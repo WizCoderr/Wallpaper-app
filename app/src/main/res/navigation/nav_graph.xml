@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/downloadFragment"
-        android:name="com.flaxstudio.wallpaperapp.fragments.DownloadFragment"
+        android:name="com.flaxstudio.wallpaper.fragments.DownloadFragment"
         android:label="fragment_download"
         tools:layout="@layout/fragment_download">
         <argument
@@ -16,7 +16,7 @@
     </fragment>
     <fragment
         android:id="@+id/searchFragment"
-        android:name="com.flaxstudio.wallpaperapp.fragments.SearchFragment"
+        android:name="com.flaxstudio.wallpaper.fragments.SearchFragment"
         android:label="fragment_search"
         tools:layout="@layout/fragment_search" >
         <action
@@ -26,16 +26,12 @@
     </fragment>
     <fragment
         android:id="@+id/hostFragment"
-        android:name="com.flaxstudio.wallpaperapp.fragments.HostFragment"
+        android:name="com.flaxstudio.wallpaper.fragments.HostFragment"
         android:label="fragment_host"
         tools:layout="@layout/fragment_host" >
         <action
             android:id="@+id/action_hostFragment_to_searchFragment"
             app:destination="@id/searchFragment" />
-        <action
-            android:id="@+id/action_hostFragment_to_downloadFragmen"
-            app:destination="@id/downloadFragment"
-            app:popUpTo="@id/hostFragment" />
         <action
             android:id="@+id/action_hostFragment_to_collectionFragment"
             app:destination="@id/collectionFragment"
@@ -47,10 +43,13 @@
         <action
             android:id="@+id/action_hostFragment_to_favoritesFragment"
             app:destination="@id/favoritesFragment" />
+        <action
+            android:id="@+id/action_hostFragment_to_downloadFragment"
+            app:destination="@id/downloadFragment" />
     </fragment>
     <fragment
         android:id="@+id/collectionFragment"
-        android:name="com.flaxstudio.wallpaperapp.fragments.CollectionFragment"
+        android:name="com.flaxstudio.wallpaper.fragments.CollectionFragment"
         android:label="fragment_collection"
         tools:layout="@layout/fragment_collection" >
         <action
@@ -64,7 +63,7 @@
     </fragment>
     <fragment
         android:id="@+id/favoritesFragment"
-        android:name="com.flaxstudio.wallpaperapp.fragments.FavoritesFragment"
+        android:name="com.flaxstudio.wallpaper.fragments.FavoritesFragment"
         android:label="fragment_favorates"
         tools:layout="@layout/fragment_favorates" >
         <action

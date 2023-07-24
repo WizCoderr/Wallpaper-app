@@ -3,7 +3,6 @@ package com.flaxstudio.wallpaper.utils
 import android.util.Log
 import com.flaxstudio.wallpaper.source.database.LikedWallpaper
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.ktx.toObject
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch

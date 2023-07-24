@@ -11,15 +11,11 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
-import com.flaxstudio.wallpaperapp.ProjectApplication
-import com.flaxstudio.wallpaperapp.R
-import com.flaxstudio.wallpaperapp.adapters.CollectionRecyclerViewAdapter
+import com.flaxstudio.wallpaper.ProjectApplication
+import com.flaxstudio.wallpaper.viewmodel.MainActivityViewModel
+import com.flaxstudio.wallpaper.viewmodel.MainActivityViewModelFactory
 import com.flaxstudio.wallpaperapp.adapters.FavouritesAdapter
 import com.flaxstudio.wallpaperapp.databinding.FragmentFavoratesBinding
-import com.flaxstudio.wallpaperapp.source.database.LikedWallpaper
-import com.flaxstudio.wallpaperapp.viewmodel.MainActivityViewModel
-import com.flaxstudio.wallpaperapp.viewmodel.MainActivityViewModelFactory
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 private var TAG = "FavouritesFragment"

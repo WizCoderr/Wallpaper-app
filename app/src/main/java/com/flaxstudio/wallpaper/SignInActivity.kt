@@ -1,22 +1,23 @@
-package com.flaxstudio.wallpaperapp
+package com.flaxstudio.wallpaper
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.view.LayoutInflater
-import android.view.View
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
+import com.flaxstudio.wallpaper.MainActivity
+import com.flaxstudio.wallpaper.ProjectApplication
+import com.flaxstudio.wallpaper.source.database.LikedWallpaper
+import com.flaxstudio.wallpaper.utils.FirebaseLikedWallpaperDao
+import com.flaxstudio.wallpaper.utils.UserDao
+import com.flaxstudio.wallpaper.utils.Users
+import com.flaxstudio.wallpaper.viewmodel.MainActivityViewModel
+import com.flaxstudio.wallpaper.viewmodel.MainActivityViewModelFactory
+import com.flaxstudio.wallpaperapp.R
 import com.flaxstudio.wallpaperapp.databinding.ActivitySignInBinding
-import com.flaxstudio.wallpaperapp.source.database.LikedWallpaper
-import com.flaxstudio.wallpaperapp.utils.FirebaseLikedWallpaperDao
-import com.flaxstudio.wallpaperapp.utils.UserDao
-import com.flaxstudio.wallpaperapp.utils.Users
-import com.flaxstudio.wallpaperapp.viewmodel.MainActivityViewModel
-import com.flaxstudio.wallpaperapp.viewmodel.MainActivityViewModelFactory
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
@@ -27,10 +28,7 @@ import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.tasks.await
-import kotlinx.coroutines.withContext
 
 private const val TAG = "SignInActivity"
 class SignInActivity : AppCompatActivity() {
