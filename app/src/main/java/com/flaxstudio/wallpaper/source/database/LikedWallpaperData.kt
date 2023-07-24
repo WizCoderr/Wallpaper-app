@@ -36,6 +36,9 @@ interface LikedWallpaperDao {
     @Insert
     fun addAllLikedWallpaper(wallpapers : List<LikedWallpaper>)
 
+    @Query("DELETE FROM Liked_wallpaper")
+    fun clearTable()
+
 
 }
 
@@ -61,6 +64,10 @@ class LikedWallpaperRepo(private val likedWallpaperDao: LikedWallpaperDao){
         likedWallpaperDao.addAllLikedWallpaper(allLikedWallpaper)
     }
 
+    @WorkerThread
+    fun clearTable(){
+        likedWallpaperDao.clearTable()
+    }
 
 }
 

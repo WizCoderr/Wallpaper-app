@@ -31,25 +31,21 @@
         tools:layout="@layout/fragment_host" >
         <action
             android:id="@+id/action_hostFragment_to_searchFragment"
-            app:destination="@id/searchFragment"
-            app:enterAnim="@anim/nav_default_enter_anim"
-            app:exitAnim="@anim/nav_default_exit_anim"
-            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
-            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+            app:destination="@id/searchFragment" />
         <action
             android:id="@+id/action_hostFragment_to_collectionFragment"
             app:destination="@id/collectionFragment"
             app:enterAnim="@anim/nav_default_enter_anim"
             app:exitAnim="@anim/nav_default_exit_anim"
             app:popEnterAnim="@anim/nav_default_pop_enter_anim"
-            app:popExitAnim="@anim/nav_default_pop_exit_anim"/>
+            app:popExitAnim="@anim/nav_default_pop_exit_anim"
+            app:popUpTo="@id/hostFragment" />
+        <action
+            android:id="@+id/action_hostFragment_to_favoritesFragment"
+            app:destination="@id/favoritesFragment" />
         <action
             android:id="@+id/action_hostFragment_to_downloadFragment"
-            app:destination="@id/downloadFragment"
-            app:enterAnim="@anim/nav_default_enter_anim"
-            app:exitAnim="@anim/nav_default_exit_anim"
-            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
-            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+            app:destination="@id/downloadFragment" />
     </fragment>
     <fragment
         android:id="@+id/collectionFragment"
@@ -62,6 +58,16 @@
             app:enterAnim="@anim/nav_default_enter_anim"
             app:exitAnim="@anim/nav_default_exit_anim"
             app:popEnterAnim="@anim/nav_default_pop_enter_anim"
-            app:popExitAnim="@anim/nav_default_pop_exit_anim"/>
+            app:popExitAnim="@anim/nav_default_pop_exit_anim"
+            app:popUpTo="@id/collectionFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/favoritesFragment"
+        android:name="com.flaxstudio.wallpaper.fragments.FavoritesFragment"
+        android:label="fragment_favorates"
+        tools:layout="@layout/fragment_favorates" >
+        <action
+            android:id="@+id/action_favoritesFragment_to_downloadFragment"
+            app:destination="@id/downloadFragment" />
     </fragment>
 </navigation>

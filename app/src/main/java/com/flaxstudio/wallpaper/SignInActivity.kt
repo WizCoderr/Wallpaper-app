@@ -5,11 +5,17 @@ import android.os.Bundle
 import android.util.Log
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
+import com.flaxstudio.wallpaper.MainActivity
+import com.flaxstudio.wallpaper.ProjectApplication
+import com.flaxstudio.wallpaper.source.database.LikedWallpaper
 import com.flaxstudio.wallpaper.utils.FirebaseLikedWallpaperDao
 import com.flaxstudio.wallpaper.utils.UserDao
 import com.flaxstudio.wallpaper.utils.Users
+import com.flaxstudio.wallpaper.viewmodel.MainActivityViewModel
+import com.flaxstudio.wallpaper.viewmodel.MainActivityViewModelFactory
 import com.flaxstudio.wallpaperapp.R
 import com.flaxstudio.wallpaperapp.databinding.ActivitySignInBinding
 import com.google.android.gms.auth.api.signin.GoogleSignIn
@@ -32,6 +38,14 @@ class SignInActivity : AppCompatActivity() {
     private lateinit var googleSignInLauncher: ActivityResultLauncher<Intent>
     private lateinit var binding: ActivitySignInBinding
 
+
+    private val mainActivityViewModel: MainActivityViewModel by viewModels {
+        MainActivityViewModelFactory(
+            (application as ProjectApplication).wallpaperRepository,
+            (application as ProjectApplication).categoryRepository,
+            (application as ProjectApplication).likedWallpaperRepository
+        )
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivitySignInBinding.inflate(layoutInflater)
@@ -85,10 +99,10 @@ class SignInActivity : AppCompatActivity() {
 
     override fun onStart() {
         super.onStart()
-//        val currUser = auth.currentUser
-//        updateUI(currUser)
-        val intent = Intent(this, MainActivity::class.java)
-        startActivity(intent)
+        val currUser = auth.currentUser
+        updateUI(currUser)
+//        val intent = Intent(this, MainActivity::class.java)
+//        startActivity(intent)
     }
     private fun firebaseAuthWithGoogle(idToken: String?) {
 
@@ -136,7 +150,10 @@ class SignInActivity : AppCompatActivity() {
     private fun getAllLikedWallpaper(uid: String) {
 
        val dao = FirebaseLikedWallpaperDao()
-        dao.getAllWallpaper(uid)
+       val allLikedWallpaper : List<LikedWallpaper> =  dao.getAllWallpaper(uid)
+
+        mainActivityViewModel.clearTable()
+        mainActivityViewModel.addAllLikedWallpaper(allLikedWallpaper)
 
     }
 
