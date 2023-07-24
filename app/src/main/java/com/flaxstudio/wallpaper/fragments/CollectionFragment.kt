@@ -20,6 +20,7 @@ import com.flaxstudio.wallpaperapp.R
 import com.flaxstudio.wallpaperapp.databinding.FragmentCollectionBinding
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 
 class CollectionFragment : Fragment() {
@@ -49,10 +50,13 @@ private var data:List<WallpaperData> = ArrayList()
         super.onViewCreated(view, savedInstanceState)
         binding.backBtn.setOnClickListener{findNavController().popBackStack()}
         binding.tvCollectionName.text = requireArguments().getString("categoryName").toString()
-        lifecycleScope.launch(Dispatchers.Main){
+        lifecycleScope.launch(Dispatchers.Default){
             mainActivityViewModel.getWallpapersCategorised(requireArguments().getString("categoryId").toString()).collect{
                 data = it
-                updateRV()
+                withContext(Dispatchers.Main){
+                    updateRV()
+                }
+
             }
         }
 

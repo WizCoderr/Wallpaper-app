@@ -17,7 +17,9 @@ import com.flaxstudio.wallpaper.viewmodel.MainActivityViewModel
 import com.flaxstudio.wallpaper.viewmodel.MainActivityViewModelFactory
 import com.flaxstudio.wallpaperapp.R
 import com.flaxstudio.wallpaperapp.databinding.FragmentAllWallpaperBinding
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 
 class AllWallpaperFragment : Fragment() {
@@ -41,10 +43,12 @@ class AllWallpaperFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        lifecycleScope.launch {
+        lifecycleScope.launch(Dispatchers.Default){
             mainActivityViewModel.getAllWallpapers().collect {
                 data = it
-                updateRV()
+                withContext(Dispatchers.Main){
+                    updateRV()
+                }
             }
 
         }
