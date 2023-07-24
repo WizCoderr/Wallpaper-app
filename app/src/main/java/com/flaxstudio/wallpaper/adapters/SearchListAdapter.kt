@@ -16,7 +16,7 @@ class SearchListAdapter(private val context: Context,private val searchData:List
     inner class SearchView(itemView: View) : RecyclerView.ViewHolder(itemView) {
          fun bind(data: WallpaperData) {
              Glide.with(context)
-                 .load(data.image_url)
+                 .load(data.image_url+"?fm=jpg&w=200&fit=max")
                  .into(itemView.findViewById(R.id.img))
             itemView.setOnClickListener {
                 val position = adapterPosition

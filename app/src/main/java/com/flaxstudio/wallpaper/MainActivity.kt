@@ -10,7 +10,9 @@ import com.flaxstudio.wallpaper.utils.FirebaseLikedWallpaperDao
 import com.flaxstudio.wallpaper.viewmodel.MainActivityViewModel
 import com.flaxstudio.wallpaper.viewmodel.MainActivityViewModelFactory
 import com.flaxstudio.wallpaperapp.databinding.ActivityMainBinding
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
@@ -30,10 +32,12 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
 
-        lifecycleScope.launch {
+        lifecycleScope.launch(Dispatchers.Default) {
             mainActivityViewModel.getAllLikedWallpaper().collect {
                 allLikedWallpapers = it
-                update()
+                withContext(Dispatchers.Main){
+                    update()
+                }
             }
         }
 

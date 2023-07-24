@@ -19,8 +19,8 @@ class CollectionRecyclerViewAdapter(private val context : Context,private val da
     }
     inner class ViewHolder(itemView : View) : RecyclerView.ViewHolder(itemView) {
 
-
-        init {
+        fun bind(data: WallpaperData){
+            Glide.with(context).load(data.image_url+"?fm=jpg&w=200&fit=max").into( itemView.findViewById(R.id.img))
             itemView.setOnClickListener {
                 val position = adapterPosition
                 if (position != RecyclerView.NO_POSITION) {
@@ -28,16 +28,11 @@ class CollectionRecyclerViewAdapter(private val context : Context,private val da
                 }
             }
         }
-
-        fun bind(data: WallpaperData){
-            Glide.with(context).load(data.image_url).into( itemView.findViewById(R.id.img))
-
-        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder =ViewHolder( LayoutInflater.from(parent.context).inflate(R.layout.collection_item , parent , false))
 
     override fun getItemCount(): Int = data.size
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) = holder.bind(data[position])
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) =holder.bind(data[position])
 }

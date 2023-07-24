@@ -22,7 +22,7 @@ class HomeRecyclerViewAdapter(private val context: Context,private val data: Lis
 
     inner class ViewHolder(itemView : View) : RecyclerView.ViewHolder(itemView) {
         fun bind(data: WallpaperCategoryData) {
-            Glide.with(context).load(data.cover_photo).into(itemView.findViewById(R.id.coverPhoto))
+            Glide.with(context).load(data.cover_photo+"?fm=jpg&w=200&fit=max").into(itemView.findViewById(R.id.coverPhoto))
             itemView.findViewById<TextView>(R.id.collection_name).text = data.title
             itemView.setOnClickListener {
                 val position = adapterPosition

@@ -19,6 +19,7 @@ import com.flaxstudio.wallpaperapp.R
 import com.flaxstudio.wallpaperapp.databinding.FragmentHomeAllBinding
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 
 class HomeFragmentAll : Fragment() {
@@ -46,10 +47,12 @@ class HomeFragmentAll : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         contextThis = requireContext()
-        lifecycleScope.launch(Dispatchers.Main){
+        lifecycleScope.launch(Dispatchers.Default){
             mainActivityViewModel.getAllCategories().collect{
                 allData = it
-                updateRecylerView()
+                withContext(Dispatchers.Main){
+                    updateRecylerView()
+                }
             }
 
         }

@@ -36,7 +36,7 @@ class MainActivityViewModel(private val wallpaperRepo: WallpaperRepo,private val
                  response: Response<List<WallpaperCategoryData>>
              ) {
                  if (response.isSuccessful){
-                     viewModelScope.launch {
+                     viewModelScope.launch(Dispatchers.Default) {
                          response.body()?.let { categoryRepo.insertData(it) }
                      }
                      Log.d("TAG", "onResponse: Data Added")
@@ -75,10 +75,6 @@ class MainActivityViewModel(private val wallpaperRepo: WallpaperRepo,private val
                         if (!result.isNullOrEmpty()) {
                             wallpaperRepo.insertWallpaper(result)
                         }
-
-                        if (index == responses.lastIndex) {
-
-                        }
                     } else {
                         // Handle API call failure
                         Log.e("TAG", "onResponse: result ${response.code()}")
@@ -94,7 +90,7 @@ class MainActivityViewModel(private val wallpaperRepo: WallpaperRepo,private val
 
      suspend fun getAllWallpapers():Flow<List<WallpaperData>> = wallpaperRepo.getAllWallpaper()
      suspend fun getWallpapersCategorised(categoryId:String):Flow<List<WallpaperData>> {
-         viewModelScope.launch {
+         viewModelScope.launch(Dispatchers.Default) {
              getWallpapers(categoryId)
          }
          return wallpaperRepo.getWallpapersCategorised(categoryId)
