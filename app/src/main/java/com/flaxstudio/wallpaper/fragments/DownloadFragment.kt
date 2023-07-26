@@ -70,6 +70,7 @@ class DownloadFragment : Fragment() {
         when(requireArguments().getInt("collect")){
             0-> data = requireArguments().getString("image").toString()
             1-> data = requireArguments().getString("categoryImg").toString()
+            2-> data = requireArguments().getString("data").toString()
         }
         Log.i("TAG", "onViewCreated: $data")
 
