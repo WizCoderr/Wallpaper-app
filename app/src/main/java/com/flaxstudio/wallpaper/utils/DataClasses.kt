@@ -7,4 +7,8 @@ data class DownloadItems(
 
 data class Users (val displayName : String = "", val imageUrl : String = "", val uid : String = "" ,val subscriber : Boolean = false , val startDate : Long = 0L , val endDate : Long = 0L)
 
-data class Gallery(val categoryName: String,val categoryId: String)
+enum class FragmentType{
+     Nature,
+     Space,
+     Animals
+}

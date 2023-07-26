@@ -8,8 +8,6 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
-import com.flaxstudio.wallpaper.MainActivity
-import com.flaxstudio.wallpaper.ProjectApplication
 import com.flaxstudio.wallpaper.source.database.LikedWallpaper
 import com.flaxstudio.wallpaper.utils.FirebaseLikedWallpaperDao
 import com.flaxstudio.wallpaper.utils.UserDao
@@ -99,10 +97,10 @@ class SignInActivity : AppCompatActivity() {
 
     override fun onStart() {
         super.onStart()
-        val currUser = auth.currentUser
-        updateUI(currUser)
-//        val intent = Intent(this, MainActivity::class.java)
-//        startActivity(intent)
+//        val currUser = auth.currentUser
+//        updateUI(currUser)
+        val intent = Intent(this, MainActivity::class.java)
+        startActivity(intent)
     }
     private fun firebaseAuthWithGoogle(idToken: String?) {
 
