@@ -1,6 +1,7 @@
 package com.flaxstudio.wallpaper.adapters
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -21,6 +22,9 @@ class GalleryAdapter (private val context: Context, private val adapterType: Fra
 
     fun addData (data : List<WallpaperData>){
         wallpaperData = data
+        Log.i("GalleryAdapter" , "the data is : ${wallpaperData}")
+        Log.i("GalleryAdapter" , "the data from viewModel : $data")
+
     }
 
 
@@ -44,6 +48,9 @@ class GalleryAdapter (private val context: Context, private val adapterType: Fra
 
         //val  data = wallpaperData[position]
 
+        Log.i("GalleryAdapter" , "the data is in binding  : ${wallpaperData}")
+
         Glide.with(context).load(R.drawable.lovingone).into(holder.imageView)
+
     }
 }
