@@ -14,11 +14,11 @@
       },
       "oauth_client": [
         {
-          "client_id": "797056517970-7kpusdap0h6hlvu9g1nmc8dqp77i17rv.apps.googleusercontent.com",
+          "client_id": "797056517970-btlc4jjjh8r8s6aa7s045d4dvg86ittu.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.flaxstudio.wallpaper",
-            "certificate_hash": "73121984c1d2294631ccaa209e4c34fa95efad0e"
+            "certificate_hash": "943334c65851ed553e36053bb0b7de7aef5dddb9"
           }
         },
         {

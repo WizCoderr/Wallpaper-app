@@ -29,7 +29,6 @@ class AllWallpaperFragment : Fragment() {
         MainActivityViewModelFactory(
             (requireActivity().application as ProjectApplication).wallpaperRepository,
             (requireActivity().application as ProjectApplication).categoryRepository,
-            (requireActivity().application as ProjectApplication).likedWallpaperRepository
         )
     }
     lateinit var thisContext:Context

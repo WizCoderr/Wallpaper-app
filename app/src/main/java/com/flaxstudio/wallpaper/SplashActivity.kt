@@ -27,7 +27,6 @@ class SplashActivity : AppCompatActivity() {
         MainActivityViewModelFactory(
             (application as ProjectApplication).wallpaperRepository,
             (application as ProjectApplication).categoryRepository,
-            (application as ProjectApplication).likedWallpaperRepository
         )
     }
 

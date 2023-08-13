@@ -11,7 +11,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.flaxstudio.wallpaper.ProjectApplication
-import com.flaxstudio.wallpaper.source.database.LikedWallpaper
+import com.flaxstudio.wallpaper.source.database.WallpaperData
 import com.flaxstudio.wallpaper.viewmodel.MainActivityViewModel
 import com.flaxstudio.wallpaper.viewmodel.MainActivityViewModelFactory
 import com.flaxstudio.wallpaperapp.R
@@ -26,13 +26,12 @@ class FavoritesFragment : Fragment() {
     lateinit var binding: FragmentFavoratesBinding
     private lateinit var thisContext : Context
     private lateinit var adapters : FavouritesAdapter
-    private var  likedWallpaper:List<LikedWallpaper> = ArrayList()
+    private var  likedWallpaper:List<WallpaperData> = ArrayList()
 
     private val mainActivityViewModel: MainActivityViewModel by activityViewModels {
         MainActivityViewModelFactory(
             (requireActivity().application as ProjectApplication).wallpaperRepository,
             (requireActivity().application as ProjectApplication).categoryRepository,
-            (requireActivity().application as ProjectApplication).likedWallpaperRepository
         )
     }
     override fun onCreateView(

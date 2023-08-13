@@ -32,7 +32,6 @@ private var data:List<WallpaperData> = ArrayList()
         MainActivityViewModelFactory(
             (requireActivity().application as ProjectApplication).wallpaperRepository,
             (requireActivity().application as ProjectApplication).categoryRepository,
-            (requireActivity().application as ProjectApplication).likedWallpaperRepository
         )
     }
     override fun onCreateView(

@@ -19,12 +19,10 @@ import androidx.core.graphics.drawable.toBitmap
 import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.flaxstudio.wallpaper.ProjectApplication
 import com.flaxstudio.wallpaper.adapters.WallpaperAdapter
-import com.flaxstudio.wallpaper.source.database.LikedWallpaper
 import com.flaxstudio.wallpaper.utils.DownloadItems
 import com.flaxstudio.wallpaper.utils.setWallpaperForHomeScreen
 import com.flaxstudio.wallpaper.utils.setWallpaperForLockScreen
@@ -34,7 +32,6 @@ import com.flaxstudio.wallpaperapp.R
 import com.flaxstudio.wallpaperapp.databinding.FragmentDownloadBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
-import kotlinx.coroutines.launch
 
 
 class DownloadFragment : Fragment() {
@@ -51,7 +48,6 @@ class DownloadFragment : Fragment() {
         MainActivityViewModelFactory(
             (requireActivity().application as ProjectApplication).wallpaperRepository,
             (requireActivity().application as ProjectApplication).categoryRepository,
-            (requireActivity().application as ProjectApplication).likedWallpaperRepository
         )
     }
 
@@ -91,20 +87,20 @@ class DownloadFragment : Fragment() {
 
     }
 
-    private fun wallpaperLiked( uid : String , imageUrl :String , blurHash : String) {
-
-        Toast.makeText(requireContext() , "Wallpaper Liked" , Toast.LENGTH_SHORT).show()
-        val likedWallpaper = LikedWallpaper(167, "xyz" , "sfdfd", false , System.currentTimeMillis() , "VnMqg0n0aFMCvHvW7UR9mMMtios2")
-        val likedWallpaper2 = LikedWallpaper(168, "xyz" , "sfdfd", false , System.currentTimeMillis() , "VnMqg0n0aFMCvHvW7UR9mMMtios2")
-        val likedWallpaper3 = LikedWallpaper(169, "xyz" , "sfdfd", false , System.currentTimeMillis() , "VnMqg0n0aFMCvHvW7UR9mMMtios2")
-        lifecycleScope.launch {
-           mainActivityViewModel.insertLikedWallpaper(likedWallpaper)
-           mainActivityViewModel.insertLikedWallpaper(likedWallpaper2)
-           mainActivityViewModel.insertLikedWallpaper(likedWallpaper3)
-            Log.i("TAG" , "inside download fr.. wallpaperLiked : $likedWallpaper")
-        }
-
-    }
+//    private fun wallpaperLiked( uid : String , imageUrl :String , blurHash : String) {
+//
+//        Toast.makeText(requireContext() , "Wallpaper Liked" , Toast.LENGTH_SHORT).show()
+//        val likedWallpaper = LikedWallpaper(167, "xyz" , "sfdfd", false , System.currentTimeMillis() , "VnMqg0n0aFMCvHvW7UR9mMMtios2")
+//        val likedWallpaper2 = LikedWallpaper(168, "xyz" , "sfdfd", false , System.currentTimeMillis() , "VnMqg0n0aFMCvHvW7UR9mMMtios2")
+//        val likedWallpaper3 = LikedWallpaper(169, "xyz" , "sfdfd", false , System.currentTimeMillis() , "VnMqg0n0aFMCvHvW7UR9mMMtios2")
+//        lifecycleScope.launch {
+//           mainActivityViewModel.insertLikedWallpaper(likedWallpaper)
+//           mainActivityViewModel.insertLikedWallpaper(likedWallpaper2)
+//           mainActivityViewModel.insertLikedWallpaper(likedWallpaper3)
+//            Log.i("TAG" , "inside download fr.. wallpaperLiked : $likedWallpaper")
+//        }
+//
+//    }
 
     private fun setAsWallpaper(bitmap: Bitmap) {
         val dialogView =

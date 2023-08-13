@@ -5,7 +5,7 @@ import android.util.Log
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
-import com.flaxstudio.wallpaper.source.database.LikedWallpaper
+import com.flaxstudio.wallpaper.source.database.WallpaperData
 import com.flaxstudio.wallpaper.utils.FirebaseLikedWallpaperDao
 import com.flaxstudio.wallpaper.viewmodel.MainActivityViewModel
 import com.flaxstudio.wallpaper.viewmodel.MainActivityViewModelFactory
@@ -22,10 +22,9 @@ class MainActivity : AppCompatActivity() {
         MainActivityViewModelFactory(
             (application as ProjectApplication).wallpaperRepository,
             (application as ProjectApplication).categoryRepository,
-            (application as ProjectApplication).likedWallpaperRepository
         )
     }
-    private var allLikedWallpapers: List<LikedWallpaper> = ArrayList()
+    private var allLikedWallpapers: List<WallpaperData> = ArrayList()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -33,7 +32,7 @@ class MainActivity : AppCompatActivity() {
 
 
         lifecycleScope.launch(Dispatchers.Default) {
-            mainActivityViewModel.getAllLikedWallpaper().collect {
+            mainActivityViewModel.getAllLikedWallpaper().collect{
                 allLikedWallpapers = it
                 withContext(Dispatchers.Main){
                     update()
@@ -45,7 +44,7 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    fun update() {
+    private fun update() {
         val dao = FirebaseLikedWallpaperDao()
         for (wallpaper in allLikedWallpapers) {
             dao.addWallpaper(wallpaper)

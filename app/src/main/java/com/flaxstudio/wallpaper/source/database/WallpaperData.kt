@@ -31,6 +31,7 @@ data class WallpaperData(
     val description: String,
     val image_url: String,
     val likes: Long,
+    val isLiked:Boolean = false,
     val is_premium: Boolean
 )
 
@@ -44,14 +45,35 @@ interface WallpaperDao{
 
     @Query("SELECT * FROM WALLPAPERS WHERE category_id = :category_id")
      fun getWallpapersCategorised(category_id: String):Flow<List<WallpaperData>>
+
+
+     @Query("Delete From wallpapers WHERE isLiked = 1")
+     fun deleteLiked(wallpaperData: WallpaperData)
+     @Query("UPDATE wallpapers SET isLiked = :isLiked WHERE _id = :_id")
+     fun setLike(isLiked: Boolean,_id: String)
+
+     @Query("SELECT * FROM wallpapers WHERE isLiked = 1")
+     fun getAllLikedWallpaper():Flow<List<WallpaperData>>
 }
 class WallpaperRepo(private val wallpaperDao: WallpaperDao){
     @WorkerThread
-     fun insertWallpaper(wallpaperData: List<WallpaperData>){
+     suspend fun insertWallpaper(wallpaperData: List<WallpaperData>){
         wallpaperDao.insertWallpaper(wallpaperData)
     }
     @WorkerThread
-     fun getAllWallpaper():Flow<List<WallpaperData>> = wallpaperDao.getAllWallpapers()
+     suspend fun getAllWallpaper():Flow<List<WallpaperData>> = wallpaperDao.getAllWallpapers()
     @WorkerThread
-    fun getWallpapersCategorised(category_id: String):Flow<List<WallpaperData>> = wallpaperDao.getWallpapersCategorised(category_id)
+    suspend fun getWallpapersCategorised(category_id: String):Flow<List<WallpaperData>> = wallpaperDao.getWallpapersCategorised(category_id)
+
+    @WorkerThread
+    suspend fun setLike(wallpaperData: WallpaperData){
+        wallpaperDao.setLike(wallpaperData.isLiked,wallpaperData._id)
+    }
+    @WorkerThread
+    suspend fun getAllLikedWallpaper() = wallpaperDao.getAllLikedWallpaper()
+
+    @WorkerThread
+    suspend fun deleteLikedWallpaper(wallpaperData: WallpaperData){
+        wallpaperDao.deleteLiked(wallpaperData)
+    }
 }

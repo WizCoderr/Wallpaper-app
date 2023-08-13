@@ -8,7 +8,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
-import com.flaxstudio.wallpaper.source.database.LikedWallpaper
+import com.flaxstudio.wallpaper.source.database.WallpaperData
 import com.flaxstudio.wallpaper.utils.FirebaseLikedWallpaperDao
 import com.flaxstudio.wallpaper.utils.UserDao
 import com.flaxstudio.wallpaper.utils.Users
@@ -41,7 +41,6 @@ class SignInActivity : AppCompatActivity() {
         MainActivityViewModelFactory(
             (application as ProjectApplication).wallpaperRepository,
             (application as ProjectApplication).categoryRepository,
-            (application as ProjectApplication).likedWallpaperRepository
         )
     }
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -148,10 +147,8 @@ class SignInActivity : AppCompatActivity() {
     private fun getAllLikedWallpaper(uid: String) {
 
        val dao = FirebaseLikedWallpaperDao()
-       val allLikedWallpaper : List<LikedWallpaper> =  dao.getAllWallpaper(uid)
+       val allLikedWallpaper : List<WallpaperData> =  dao.getAllWallpaper(uid)
 
-        mainActivityViewModel.clearTable()
-        mainActivityViewModel.addAllLikedWallpaper(allLikedWallpaper)
 
     }
 
