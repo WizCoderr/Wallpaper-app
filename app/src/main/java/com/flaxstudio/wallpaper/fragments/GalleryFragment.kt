@@ -72,10 +72,7 @@ class GalleryFragment(fragmentType: FragmentType) : Fragment() {
 //        }
 
 
-
-
     }
-
 
 
     private fun setUpView() {
@@ -87,36 +84,44 @@ class GalleryFragment(fragmentType: FragmentType) : Fragment() {
         binding.rvItem.adapter = adapter
         binding.rvItem.layoutManager = gridLayoutManager
 
+        Log.i("GalleryFragment" , "setup View is called")
+
 
     }
 
     private fun setUpData()  = lifecycleScope.launch{
 
+        Log.i("GalleryFragment" , "setup data start is called")
+
+
         when(fragmentType){
             FragmentType.Nature -> {
+
                 mainActivityViewModel.getWallpapersCategorised("1319040").collect(){
-                    Log.i("GalleryFragment" , "Nature")
-                    Log.i("GalleryFragment" , "$it")
                     adapter.addData(it)
+                    Log.i("GalleryFragment" , "nature data : $it")
                 }
+
+
             }
             FragmentType.Space ->{
                 mainActivityViewModel.getWallpapersCategorised("4332580").collect(){
-                    Log.i("GalleryFragment" , "Space")
-                    Log.i("GalleryFragment" , "$it")
                     adapter.addData(it)
+                    Log.i("GalleryFragment" , "nature data : $it")
                 }
+
             }
             FragmentType.Animals ->{
                 mainActivityViewModel.getWallpapersCategorised("8613876").collect(){
-                    Log.i("GalleryFragment" , "Animals")
-                    Log.i("GalleryFragment" , "$it")
-
                     adapter.addData(it)
+                    Log.i("GalleryFragment" , "nature data : $it")
                 }
+
             }
 
         }
+
+
 
 
     }
